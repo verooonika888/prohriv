@@ -28,7 +28,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // ЗАМІНІТЬ YOUR_PIXEL_ID НА ВАШ ID
+    // ЗАМІНІТЬ YOUR_PIXEL_ID
     fbq('init', 'YOUR_PIXEL_ID'); 
     fbq('track', 'PageView');
     </script>
@@ -46,24 +46,21 @@
                     },
                     colors: {
                         brand: {
-                            red: '#E63946',       // Яскравий червоний
-                            darkred: '#9B2226',   // Темно-червоний для ховерів
-                            bg: '#1C1C1C',        // Темно-сірий фон (графіт)
-                            asphalt: '#262626',   // Картки трохи світліші за фон
+                            red: '#E63946',       
+                            darkred: '#9B2226',   
+                            bg: '#1C1C1C',        // Темно-сірий фон
+                            asphalt: '#262626',   
                             lightgrey: '#333333', 
                             border: '#404040',
                             input: '#2A2A2A',
-                            gold: '#FFD700',      // Для гарантії
+                            gold: '#FFD700',      
                         }
                     },
                     boxShadow: {
-                        'glow': '0 0 20px rgba(230, 57, 70, 0.4)', // Червоне світіння
+                        'glow': '0 0 20px rgba(230, 57, 70, 0.4)',
                         'card': '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
                         'gold-glow': '0 0 20px rgba(255, 215, 0, 0.2)',
                     },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
                 }
             }
         }
@@ -94,26 +91,15 @@
         .iti__selected-flag { background-color: #2A2A2A !important; }
         
         /* 
-           ГРАДІЄНТ:
-           Налаштований так, щоб темрява різко закінчувалася на 60-70%,
-           залишаючи праву сторону (де Влада) повністю прозорою.
+           ГРАДІЄНТ (Жорсткий):
+           Темний колір йде до 50%, потім різко переходить у прозорість.
+           Це залишає праву частину чистою для фото.
         */
         .hero-gradient {
-            background: linear-gradient(90deg, #1C1C1C 10%, rgba(28,28,28,0.95) 40%, rgba(28,28,28,0) 80%);
-        }
-        
-        /* 
-           МОБІЛЬНИЙ ГРАДІЄНТ:
-           Тут ми ще швидше прибираємо темряву, щоб на вузькому екрані 
-           справа було чисто.
-        */
-        @media (max-width: 768px) {
-            .hero-gradient {
-                background: linear-gradient(90deg, #1C1C1C 20%, rgba(28,28,28,0.9) 55%, rgba(28,28,28,0) 75%);
-            }
+            background: linear-gradient(90deg, #1C1C1C 30%, rgba(28,28,28,0.9) 55%, transparent 85%);
         }
 
-        /* Glassmorphism для карток */
+        /* Glassmorphism */
         .glass-card {
             background: rgba(40, 40, 40, 0.75);
             backdrop-filter: blur(12px);
@@ -121,49 +107,42 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Safe area для iPhone */
-        .pb-safe {
-            padding-bottom: env(safe-area-inset-bottom, 20px);
-        }
-
-        /* Hide Scrollbar for Horizontal Scroll */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        
+        /* Hide Scrollbar */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
     <!-- HERO SECTION -->
     <section class="relative min-h-[90vh] flex flex-col justify-end pb-12 overflow-hidden bg-brand-bg">
-        <!-- ФОТО -->
-        <div class="absolute inset-0 z-0">
-            <!-- 
-               ВИПРАВЛЕНО: object-right-bottom
-               Це змушує фото "прилипнути" до правого нижнього кута.
-               Влада буде завжди справа, навіть на телефоні.
-            -->
-            <img src="hero-vlada.png" 
-                 alt="Vlada Tsarenko" 
-                 class="w-full h-full object-cover object-right-bottom md:object-[center_bottom]">
-            
-            <!-- Градієнт поверх фото -->
-            <div class="hero-gradient absolute inset-0"></div>
-        </div>
+        
+        <!-- ФОТО ВЛАДИ -->
+        <!-- 
+            right-[-25%] - зсуває Владу вправо, ховаючи лікоть за екран.
+            w-[120%] - робить фото великим на мобільному, щоб її було добре видно.
+            md:right-0 md:w-auto - на комп'ютері стає нормально.
+            z-0 - на задньому плані.
+        -->
+        <img src="hero-vlada.png" 
+             alt="Vlada Tsarenko" 
+             class="absolute bottom-0 right-[-25%] md:right-0 w-[120%] md:w-auto md:h-[95%] max-w-none object-contain z-0">
+        
+        <!-- ГРАДІЄНТ -->
+        <!-- Тільки зліва направо, щоб закрити текст, але не Владу -->
+        <div class="hero-gradient absolute inset-0 z-10 pointer-events-none"></div>
 
-        <div class="container mx-auto px-4 relative z-10 max-w-lg md:max-w-5xl">
+        <div class="container mx-auto px-4 relative z-20 max-w-lg md:max-w-5xl">
             
             <!-- OFFER WRAPPER -->
             <!-- 
-               ВИПРАВЛЕНО: w-[65%]
-               Ми зменшили ширину тексту на мобільному до 65%, 
-               щоб гарантовано залишити 35% екрану справа для Влади.
+               w-[55%] - Жорстке обмеження ширини тексту на мобільному.
+               Текст займає тільки 55% екрану зліва.
+               Решта 45% справа гарантовано залишається для Влади.
             -->
-            <div class="w-[65%] md:w-[60%] lg:w-[50%] mb-8">
+            <div class="w-[55%] md:w-[60%] lg:w-[50%] mb-8">
                 <!-- TAG -->
                 <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow">
                     Персональна діагностика
@@ -182,9 +161,8 @@
                 </p>
             </div>
 
-            <!-- PRICE BLOCK & BUTTON WRAPPER -->
+            <!-- PRICE BLOCK -->
             <div class="w-[85%] md:w-[50%]">
-                <!-- PRICE BLOCK -->
                 <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6">
                     <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -220,7 +198,7 @@
         </div>
     </section>
 
-    <!-- AGITATION SECTION (PAIN POINTS) -->
+    <!-- AGITATION SECTION -->
     <section class="py-20 px-4 bg-brand-bg">
         <div class="max-w-md mx-auto space-y-10">
             <h2 class="text-3xl font-extrabold text-white leading-none uppercase tracking-tight text-center">
@@ -324,7 +302,6 @@
             </h2>
             
             <div class="grid gap-4">
-                <!-- Card 1 -->
                 <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
                     <div class="text-4xl font-black text-brand-red/80 mt-1">01</div>
                     <div>
@@ -333,7 +310,6 @@
                     </div>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
                     <div class="text-4xl font-black text-brand-red/80 mt-1">02</div>
                     <div>
@@ -342,7 +318,6 @@
                     </div>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
                     <div class="text-4xl font-black text-brand-red/80 mt-1">03</div>
                     <div>
@@ -361,9 +336,7 @@
                 Результати <span class="text-brand-red">учнів</span>
             </h2>
             
-            <!-- Horizontal Slider Container -->
             <div class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-                
                 <script>
                     for(let i = 1; i <= 15; i++) {
                         document.write(`
@@ -376,7 +349,6 @@
                         `);
                     }
                 </script>
-                
             </div>
             
             <div class="flex items-center justify-center gap-2 text-gray-500 mt-2 animate-pulse">
@@ -387,12 +359,10 @@
         </div>
     </section>
 
-    <!-- FINAL GUARANTEE SECTION -->
+    <!-- GUARANTEE SECTION -->
     <section class="py-20 px-4 bg-brand-bg text-center pb-32">
         <div class="max-w-md mx-auto">
-            
             <div class="bg-brand-asphalt border-2 border-brand-gold/20 rounded-2xl p-8 shadow-gold-glow relative overflow-hidden">
-                <!-- Background Decoration -->
                 <div class="absolute top-0 right-0 p-8 opacity-5">
                     <i data-lucide="shield-check" class="w-48 h-48 text-brand-gold"></i>
                 </div>
@@ -417,11 +387,10 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- FLOATING STICKY CTA BUTTON -->
+    <!-- FLOATING CTA -->
     <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
@@ -436,7 +405,7 @@
         <p>Влада Царенко &copy; 2025</p>
     </footer>
 
-    <!-- LEAD FORM MODAL -->
+    <!-- MODAL -->
     <div id="modal" class="fixed inset-0 z-[60] hidden">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-sm px-4">
@@ -464,7 +433,7 @@
         </div>
     </div>
 
-    <!-- IMAGE LIGHTBOX MODAL -->
+    <!-- IMAGE LIGHTBOX -->
     <div id="image-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity" onclick="closeImageModal()"></div>
         <div class="relative w-full max-w-4xl h-full max-h-[90vh] flex items-center justify-center">
