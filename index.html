@@ -90,18 +90,14 @@
         }
         .iti__selected-flag { background-color: #2A2A2A !important; }
         
-        /* 
-           ГРАДІЄНТ:
-           Дуже різкий перехід. Темрява тільки зліва (до 45%), 
-           далі різко прозоро, щоб було видно Владу справа.
-        */
+        /* ГРАДІЄНТ: Різкий перехід, щоб відкрити праву частину */
         .hero-gradient {
             background: linear-gradient(90deg, #1C1C1C 15%, rgba(28,28,28,0.95) 45%, transparent 70%);
         }
 
         /* Glassmorphism */
         .glass-card {
-            background: rgba(40, 40, 40, 0.85); /* Трохи темніше для кращого контрасту */
+            background: rgba(40, 40, 40, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -119,12 +115,13 @@
         
         <!-- ФОТО ВЛАДИ -->
         <!-- 
-            right-[-45%] - Дуже сильний зсув вправо. Лікоть/плече обріжеться, але обличчя і тіло будуть вільні від тексту.
-            w-[140%] - Збільшений масштаб, щоб вона була великою.
+            bottom-[-15%]: Опускає картинку вниз, щоб голова не обрізалась зверху.
+            right-[-45%]: Сильний зсув вправо, щоб звільнити місце для тексту.
+            w-[140%]: Великий розмір фото.
         -->
         <img src="hero-vlada.png" 
              alt="Vlada Tsarenko" 
-             class="absolute bottom-0 right-[-45%] md:right-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
+             class="absolute bottom-[-15%] right-[-45%] md:right-0 md:bottom-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
         
         <!-- ГРАДІЄНТ -->
         <div class="hero-gradient absolute inset-0 z-10 pointer-events-none"></div>
@@ -132,31 +129,23 @@
         <div class="container mx-auto px-4 relative z-20 max-w-lg md:max-w-5xl">
             
             <!-- OFFER WRAPPER (ТЕКСТ) -->
-            <!-- Залишаємо зліва, вузький (60%), щоб не ліз на Владу -->
             <div class="w-[60%] md:w-[60%] lg:w-[50%] mb-6">
-                <!-- TAG -->
                 <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow">
                     Персональна діагностика
                 </div>
                 
-                <!-- H1 -->
                 <h1 class="text-3xl md:text-5xl font-extrabold leading-[1.1] text-white uppercase drop-shadow-2xl">
                     ОТРИМАЙ ПЕРСОНАЛЬНУ <br>
                     <span class="text-brand-red">СТРАТЕГІЮ КОНТЕНТУ</span>,
                     ЯКА ДАЄ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
                 </h1>
                 
-                <!-- SUBTEXT -->
                 <p class="text-gray-200 font-semibold mt-5 text-xs md:text-base leading-relaxed border-l-4 border-brand-red pl-4 py-2">
                     З блогу, навіть на малих охопленнях. Без вигорання. За рахунок потужних сторітелів.
                 </p>
             </div>
 
-            <!-- PRICE BLOCK WRAPPER (ЦІНА) -->
-            <!-- 
-                w-full flex justify-center: На мобільному розтягується і центрує вміст.
-                md:justify-start: На комп'ютері вертається вліво.
-            -->
+            <!-- PRICE BLOCK WRAPPER (ЦІНА) - По центру на мобільному -->
             <div class="w-full md:w-[50%] flex justify-center md:justify-start relative z-30">
                 <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6 w-[95%] max-w-sm">
                     <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
