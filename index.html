@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -35,6 +35,528 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
     /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#E63946',       // Яскравий червоний
+                            darkred: '#9B2226',   // Темно-червоний для ховерів
+                            bg: '#121212',        // Майже чорний фон
+                            asphalt: '#1E1E1E',   // Асфальтовий колір карток
+                            lightgrey: '#2C2C2C', // Світліший асфальт
+                            border: '#333333',
+                            input: '#252525',
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(230, 57, 70, 0.4)', // Червоне світіння
+                        'card': '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #121212; color: #ffffff; }
+        
+        /* Стилі інпутів */
+        .iti { width: 100%; }
+        .iti__flag { background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags.png"); }
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+          .iti__flag { background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags@2x.png"); }
+        }
+        
+        input {
+            background-color: #252525 !important;
+            border: 1px solid #404040 !important;
+            color: white !important;
+            border-radius: 8px !important;
+            font-size: 16px !important;
+        }
+        input:focus {
+            border-color: #E63946 !important;
+            box-shadow: 0 0 0 1px #E63946 !important;
+            outline: none !important;
+        }
+        .iti__selected-flag { background-color: #252525 !important; }
+        
+        /* Градієнт героя */
+        .hero-gradient {
+            background: linear-gradient(to top, #121212 5%, rgba(18,18,18,0.8) 40%, rgba(18,18,18,0.1) 100%);
+        }
+
+        /* Glassmorphism для карток */
+        .glass-card {
+            background: rgba(30, 30, 30, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Safe area для iPhone */
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-24">
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[90vh] flex flex-col justify-end pb-12 overflow-hidden bg-brand-bg">
+        <!-- ФОТО (ЗАМЕНИТЬ ССЫЛКУ) -->
+        <div class="absolute inset-0 z-0">
+            <!-- ТУТ ВСТАВИТИ ВЕЛИКЕ ФОТО ВЛАДИСЛАВИ -->
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop" 
+                 alt="Vlada Tsarenko" 
+                 class="w-full h-full object-cover object-center md:object-top opacity-90">
+            <div class="hero-gradient absolute inset-0"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 max-w-lg">
+            
+            <!-- OFFER -->
+            <div class="mb-8">
+                <!-- TAG -->
+                <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow">
+                    Персональна діагностика
+                </div>
+                
+                <!-- H1 -->
+                <h1 class="text-3xl md:text-5xl font-extrabold leading-[1.1] text-white uppercase drop-shadow-2xl">
+                    ОТРИМАЙ ПЕРСОНАЛЬНУ <br>
+                    <span class="text-brand-red">СТРАТЕГІЮ КОНТЕНТУ</span>,
+                    ЯКА ДАЄ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
+                </h1>
+                
+                <!-- SUBTEXT -->
+                <p class="text-gray-200 font-semibold mt-5 text-sm md:text-base leading-relaxed border-l-4 border-brand-red pl-4 bg-black/20 backdrop-blur-sm rounded-r-lg py-2">
+                    З блогу, навіть на малих охопленнях. Без вигорання. За рахунок потужних сторітелів.
+                </p>
+            </div>
+
+            <!-- PRICE BLOCK -->
+            <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6">
+                <!-- Анімація світіння фону -->
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-3 border-b border-gray-500/30 pb-2">
+                        <span class="flex items-center gap-2 text-[10px] md:text-xs text-red-400 font-bold uppercase tracking-wider animate-pulse">
+                            <span class="w-2 h-2 bg-brand-red rounded-full"></span>
+                            До збільшення ціни:
+                        </span>
+                        <div class="font-mono font-bold text-white text-lg tracking-wider" id="hero-timer">10:00</div>
+                    </div>
+                    
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <div class="text-5xl font-black text-white tracking-tight">390 ₴</div>
+                        </div>
+                        <div class="text-right pb-2">
+                            <div class="text-lg text-gray-500 line-through decoration-brand-red decoration-2 font-bold">1790 ₴</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка (Десктоп) -->
+            <div class="hidden md:block">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу свою стратегію</span>
+                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- AGITATION SECTION (PAIN POINTS) -->
+    <section class="py-20 px-4 bg-brand-bg">
+        <div class="max-w-md mx-auto space-y-10">
+            <h2 class="text-3xl font-extrabold text-white leading-none uppercase tracking-tight text-center">
+                Впізнаєш <span class="text-brand-red">себе?</span>
+            </h2>
+            
+            <div class="space-y-6">
+                <!-- Card 1 -->
+                <div class="bg-brand-asphalt p-7 rounded-xl border border-brand-border shadow-card relative overflow-hidden group hover:border-brand-red/50 transition-colors duration-300">
+                    <div class="absolute -right-4 -top-4 text-brand-lightgrey/20 group-hover:text-brand-red/10 transition-colors">
+                        <i data-lucide="alert-circle" class="w-24 h-24"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Дії не призводять до бажаних продажів</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Є результати, але нестабільні. Дохід то злітає, то падає. Немає чіткого розуміння "що робити в контенті, щоб приходили потенційні клієнти".
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-brand-asphalt p-7 rounded-xl border border-brand-border shadow-card relative overflow-hidden group hover:border-brand-red/50 transition-colors duration-300">
+                    <div class="absolute -right-4 -top-4 text-brand-lightgrey/20 group-hover:text-brand-red/10 transition-colors">
+                        <i data-lucide="bar-chart-2" class="w-24 h-24"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Малі охоплення</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Здається, що ще недостатньо розвинений блог для стабільного потоку заявок.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-brand-asphalt p-7 rounded-xl border border-brand-border shadow-card relative overflow-hidden group hover:border-brand-red/50 transition-colors duration-300">
+                    <div class="absolute -right-4 -top-4 text-brand-lightgrey/20 group-hover:text-brand-red/10 transition-colors">
+                        <i data-lucide="brain-circuit" class="w-24 h-24"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Хаос і протиріччя у голові</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Як транслювати свої справжні грані особистості та цінності, а не заїжджені скрипти і фрази, щоб залучити нових людей, які будуть купувати.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERT SECTION -->
+    <section class="py-20 px-4 bg-[#161616] border-y border-brand-border relative">
+        <div class="max-w-md mx-auto">
+            <div class="mb-8 text-center">
+                <span class="text-brand-red text-xs uppercase tracking-[0.2em] font-extrabold block mb-2">Хто веде розбір</span>
+                <h2 class="text-4xl font-black text-white uppercase">Влада Царенко</h2>
+            </div>
+
+            <!-- PHOTO EXPERT -->
+            <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-8 relative shadow-2xl border border-gray-800">
+                 <!-- ЗАМЕНИТЬ ССЫЛКУ -->
+                 <img src="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2070&auto=format&fit=crop" 
+                     alt="Vlada Tsarenko" 
+                     class="w-full h-full object-cover filter contrast-110">
+            </div>
+
+            <div class="space-y-6 text-gray-300 text-base">
+                <div class="bg-brand-asphalt p-6 rounded-xl border-l-4 border-brand-red shadow-lg">
+                    <p class="text-white font-medium italic leading-relaxed">
+                        "Моя ціль — показати тобі, що продавати можна легше через потужний інструмент прогрівів і контенту без награних маніпуляцій."
+                    </p>
+                </div>
+                
+                <ul class="space-y-6 mt-6">
+                    <!-- Item 1 -->
+                    <li class="flex items-start gap-4">
+                        <div class="bg-brand-red/20 p-2 rounded-full text-brand-red shrink-0">
+                            <i data-lucide="zap" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1 uppercase text-sm tracking-wide">Авторська методика</strong>
+                            <span class="text-sm text-gray-400">Побудова прогрівів і контенту на малих охопленнях.</span>
+                        </div>
+                    </li>
+                    <!-- Item 2 -->
+                    <li class="flex items-start gap-4">
+                        <div class="bg-brand-red/20 p-2 rounded-full text-brand-red shrink-0">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1 uppercase text-sm tracking-wide">Системний підхід без самокритики</strong>
+                            <span class="text-sm text-gray-400">Де навіть холодні незацікавлені люди стають теплими зацікавленими клієнтами.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="py-20 px-4 bg-brand-bg">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-3xl font-extrabold mb-10 uppercase text-white tracking-wide text-center">
+                Що ти <span class="text-gray-500">отримаєш:</span>
+            </h2>
+            
+            <div class="grid gap-4">
+                <!-- Card 1 -->
+                <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
+                    <div class="text-4xl font-black text-brand-red/80 mt-1">01</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg uppercase mb-1">Стратегія дій</h3>
+                        <p class="text-sm text-gray-400 leading-snug">Покроковий план під твої цілі і нішу.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
+                    <div class="text-4xl font-black text-brand-red/80 mt-1">02</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg uppercase mb-1">Аудит помилок</h3>
+                        <p class="text-sm text-gray-400 leading-snug">Чому контент не конвертує.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
+                    <div class="text-4xl font-black text-brand-red/80 mt-1">03</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg uppercase mb-1">Схема прогрівів</h3>
+                        <p class="text-sm text-gray-400 leading-snug">Особисто свою схему прогрівів.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section class="py-20 px-4 bg-[#161616] border-t border-brand-border">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-2xl font-black text-center mb-8 text-white uppercase tracking-wide">
+                Результати <span class="text-brand-red">учнів</span>
+            </h2>
+            
+            <!-- Grid Container -->
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
+                <!-- ПРИКЛАД (Повторить 15 разів) -->
+                <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
+                    <img src="https://via.placeholder.com/300x300?text=Result+1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Review">
+                    <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <!-- Копіювати блок вище -->
+                <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
+                    <img src="https://via.placeholder.com/300x300?text=Result+2" class="w-full h-full object-cover" alt="Review">
+                </div>
+                <!-- ... Інші фото ... -->
+                 <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
+                    <img src="https://via.placeholder.com/300x300?text=Result+3" class="w-full h-full object-cover" alt="Review">
+                </div>
+                 <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
+                    <img src="https://via.placeholder.com/300x300?text=Result+4" class="w-full h-full object-cover" alt="Review">
+                </div>
+                 <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
+                    <img src="https://via.placeholder.com/300x300?text=Result+5" class="w-full h-full object-cover" alt="Review">
+                </div>
+            </div>
+            <p class="text-center text-[10px] text-gray-500 mt-4 uppercase tracking-widest">(Натисніть на фото для перегляду)</p>
+        </div>
+    </section>
+
+    <!-- FINAL CTA (Static block) -->
+    <section class="py-20 px-4 bg-brand-bg text-center pb-32">
+        <div class="max-w-md mx-auto">
+            
+            <div class="bg-brand-asphalt border border-brand-border rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-red to-transparent"></div>
+                
+                <h3 class="text-2xl font-black text-white mb-8 uppercase">Забронювати місце</h3>
+                
+                <div class="flex items-center justify-center gap-6 mb-8">
+                    <div class="text-center opacity-50 grayscale">
+                        <div class="text-sm line-through text-gray-400 font-bold">1790 ₴</div>
+                    </div>
+                    <div class="w-px h-12 bg-gray-700"></div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white drop-shadow-lg">390 ₴</div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center items-center gap-2 mb-8 bg-black/30 py-3 rounded-lg border border-white/5">
+                    <i data-lucide="clock" class="w-4 h-4 text-brand-red"></i>
+                    <span class="text-gray-400 text-xs font-bold uppercase">До збільшення ціни:</span>
+                    <span class="text-white font-mono font-bold text-lg" id="footer-timer">10:00</span>
+                </div>
+
+                <p class="text-[10px] text-gray-500 mb-2">
+                    *Гарантія повернення коштів, якщо розбір не буде корисним.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FLOATING STICKY CTA BUTTON (MOBILE + DESKTOP) -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6">
+        <div class="max-w-md mx-auto">
+            <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
+                <span>Хочу свою стратегію</span>
+                <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0f0f0f] py-8 text-center text-gray-600 text-[10px] uppercase tracking-widest border-t border-[#222]">
+        <p>Влада Царенко &copy; 2025</p>
+    </footer>
+
+    <!-- LEAD FORM MODAL -->
+    <div id="modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-sm px-4">
+            <div class="bg-brand-asphalt border border-brand-border rounded-xl p-6 shadow-2xl relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <h3 class="text-2xl font-black text-white text-center mb-2 uppercase">Останній крок</h3>
+                <p class="text-gray-400 text-center text-xs mb-6 font-medium">Залиште дані для зв'язку в Telegram</p>
+                <form id="leadForm" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Ваше Ім'я</label>
+                        <input type="text" id="name" name="name" required placeholder="Введіть ім'я" class="w-full h-14 px-4 font-bold placeholder-gray-600">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Телефон (Telegram)</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full h-14 px-4 font-bold">
+                        <p id="phone-error" class="text-brand-red text-xs mt-1 hidden font-bold">Перевірте правильність номеру</p>
+                    </div>
+                    <button type="submit" id="submitBtn" class="w-full bg-brand-red hover:bg-red-800 text-white font-extrabold text-lg py-4 rounded-lg transition-all mt-4 uppercase tracking-widest shadow-lg">
+                        Отримати доступ
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMAGE LIGHTBOX MODAL -->
+    <div id="image-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity" onclick="closeImageModal()"></div>
+        <div class="relative w-full max-w-4xl h-full max-h-[90vh] flex items-center justify-center">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 z-50 p-2 bg-brand-red/80 rounded-full text-white hover:bg-brand-red">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <img id="lightbox-image" src="" alt="Review Fullscreen" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-gray-800">
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"></script>
+
+    <script>
+        lucide.createIcons();
+
+        // --- CONFIGURATION ---
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
+        const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK_HERE'; 
+
+        // --- TIMER ---
+        function startTimer(duration, displays) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                displays.forEach(display => {
+                    if(display) display.textContent = minutes + ":" + seconds;
+                });
+                if (--timer < 0) timer = 0;
+            }, 1000);
+        }
+
+        window.onload = function () {
+            const tenMinutes = 60 * 10;
+            const displays = [document.querySelector('#hero-timer'), document.querySelector('#footer-timer')];
+            startTimer(tenMinutes, displays);
+        };
+
+        // --- PHONE INPUT ---
+        const input = document.querySelector("#phone");
+        const iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            geoIpLookup: function(success, failure) {
+                fetch("https://get.geojs.io/v1/ip/country.json")
+                    .then(res => res.json())
+                    .then(data => success(data.country))
+                    .catch(() => success("ua"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+            separateDialCode: true
+        });
+
+        // --- MODALS ---
+        const modal = document.getElementById('modal');
+        function openModal() {
+            modal.classList.remove('hidden');
+            fbq('track', 'InitiateCheckout');
+        }
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        // --- LIGHTBOX LOGIC ---
+        const imageModal = document.getElementById('image-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+
+        function openImageModal(element) {
+            const img = element.querySelector('img');
+            if (img) {
+                lightboxImage.src = img.src;
+                imageModal.classList.remove('hidden');
+            }
+        }
+        function closeImageModal() {
+            imageModal.classList.add('hidden');
+        }
+
+        // --- SUBMISSION ---
+        const form = document.getElementById('leadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMsg = document.getElementById('phone-error');
+
+        function getUTM() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                source: params.get('utm_source') || '',
+                medium: params.get('utm_medium') || '',
+                campaign: params.get('utm_campaign') || '',
+                content: params.get('utm_content') || '',
+                term: params.get('utm_term') || ''
+            };
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            errorMsg.classList.add('hidden');
+            if (!iti.isValidNumber()) {
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'ОБРОБКА...';
+            const formData = {
+                date: new Date().toLocaleString("uk-UA"),
+                name: document.getElementById('name').value,
+                phone: iti.getNumber(),
+                ...getUTM()
+            };
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            }).then(() => {
+                fbq('track', 'Lead');
+                window.location.href = TELEGRAM_BOT_URL;
+            }).catch(err => {
+                console.error('Error:', err);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'СПРОБУВАТИ ЩЕ РАЗ';
+            });
+        });
+    </script>
+</body>
+</html>    /></noscript>
     <!-- End Meta Pixel Code -->
 
     <script>
