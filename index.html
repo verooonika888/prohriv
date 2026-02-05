@@ -53,11 +53,13 @@
                             lightgrey: '#2C2C2C', // Світліший асфальт
                             border: '#333333',
                             input: '#252525',
+                            gold: '#FFD700',      // Для гарантії
                         }
                     },
                     boxShadow: {
                         'glow': '0 0 20px rgba(230, 57, 70, 0.4)', // Червоне світіння
                         'card': '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
+                        'gold-glow': '0 0 20px rgba(255, 215, 0, 0.2)',
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -107,6 +109,15 @@
         /* Safe area для iPhone */
         .pb-safe {
             padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+
+        /* Hide Scrollbar for Horizontal Scroll */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
@@ -173,7 +184,7 @@
             <!-- Кнопка (Десктоп) -->
             <div class="hidden md:block">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу свою стратегію</span>
+                    <span>Хочу персональну стратегію</span>
                     <i data-lucide="arrow-right" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -297,88 +308,90 @@
                     </div>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Card 2 (UPDATED) -->
                 <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
                     <div class="text-4xl font-black text-brand-red/80 mt-1">02</div>
                     <div>
                         <h3 class="font-bold text-white text-lg uppercase mb-1">Аудит помилок</h3>
-                        <p class="text-sm text-gray-400 leading-snug">Чому контент не конвертує.</p>
+                        <p class="text-sm text-gray-400 leading-snug">Чому контент не конвертує заявки.</p>
                     </div>
                 </div>
 
-                <!-- Card 3 -->
+                <!-- Card 3 (UPDATED) -->
                 <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
                     <div class="text-4xl font-black text-brand-red/80 mt-1">03</div>
                     <div>
                         <h3 class="font-bold text-white text-lg uppercase mb-1">Схема прогрівів</h3>
-                        <p class="text-sm text-gray-400 leading-snug">Особисто свою схему прогрівів.</p>
+                        <p class="text-sm text-gray-400 leading-snug">Власна схема прогрівів під тебе.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- REVIEWS SECTION -->
-    <section class="py-20 px-4 bg-[#161616] border-t border-brand-border">
-        <div class="max-w-2xl mx-auto">
+    <!-- REVIEWS SECTION (UPDATED: SLIDER 15 ITEMS) -->
+    <section class="py-20 bg-[#161616] border-t border-brand-border overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4">
             <h2 class="text-2xl font-black text-center mb-8 text-white uppercase tracking-wide">
                 Результати <span class="text-brand-red">учнів</span>
             </h2>
             
-            <!-- Grid Container -->
-            <div class="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
-                <!-- ПРИКЛАД (Повторить 15 разів) -->
-                <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                    <img src="https://via.placeholder.com/300x300?text=Result+1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Review">
-                    <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-                <!-- Копіювати блок вище -->
-                <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
-                    <img src="https://via.placeholder.com/300x300?text=Result+2" class="w-full h-full object-cover" alt="Review">
-                </div>
-                <!-- ... Інші фото ... -->
-                 <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
-                    <img src="https://via.placeholder.com/300x300?text=Result+3" class="w-full h-full object-cover" alt="Review">
-                </div>
-                 <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
-                    <img src="https://via.placeholder.com/300x300?text=Result+4" class="w-full h-full object-cover" alt="Review">
-                </div>
-                 <div class="aspect-square bg-brand-lightgrey rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all" onclick="openImageModal(this)">
-                    <img src="https://via.placeholder.com/300x300?text=Result+5" class="w-full h-full object-cover" alt="Review">
-                </div>
+            <!-- Horizontal Slider Container -->
+            <div class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+                
+                <!-- Script to generate 15 placeholders for clean code -->
+                <script>
+                    for(let i = 1; i <= 15; i++) {
+                        document.write(`
+                            <div class="snap-center shrink-0 w-[70vw] md:w-[250px] aspect-[4/5] bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-gray-700 hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
+                                <img src="https://via.placeholder.com/400x500?text=Result+${i}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" alt="Review ${i}">
+                                <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
+                                </div>
+                            </div>
+                        `);
+                    }
+                </script>
+                
             </div>
-            <p class="text-center text-[10px] text-gray-500 mt-4 uppercase tracking-widest">(Натисніть на фото для перегляду)</p>
+            
+            <div class="flex items-center justify-center gap-2 text-gray-500 mt-2 animate-pulse">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                <p class="text-[10px] uppercase tracking-widest">Гортайте та натисніть для перегляду</p>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </div>
         </div>
     </section>
 
-    <!-- FINAL CTA (Static block) -->
+    <!-- FINAL GUARANTEE SECTION (UPDATED) -->
     <section class="py-20 px-4 bg-brand-bg text-center pb-32">
         <div class="max-w-md mx-auto">
             
-            <div class="bg-brand-asphalt border border-brand-border rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-red to-transparent"></div>
-                
-                <h3 class="text-2xl font-black text-white mb-8 uppercase">Забронювати місце</h3>
-                
-                <div class="flex items-center justify-center gap-6 mb-8">
-                    <div class="text-center opacity-50 grayscale">
-                        <div class="text-sm line-through text-gray-400 font-bold">1790 ₴</div>
-                    </div>
-                    <div class="w-px h-12 bg-gray-700"></div>
-                    <div class="text-center">
-                        <div class="text-5xl font-black text-white drop-shadow-lg">390 ₴</div>
-                    </div>
+            <div class="bg-brand-asphalt border-2 border-brand-gold/20 rounded-2xl p-8 shadow-gold-glow relative overflow-hidden">
+                <!-- Background Decoration -->
+                <div class="absolute top-0 right-0 p-8 opacity-5">
+                    <i data-lucide="shield-check" class="w-48 h-48 text-brand-gold"></i>
                 </div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="bg-brand-gold/10 p-4 rounded-full mb-6 text-brand-gold border border-brand-gold/30">
+                        <i data-lucide="shield-check" class="w-12 h-12"></i>
+                    </div>
 
-                <div class="flex justify-center items-center gap-2 mb-8 bg-black/30 py-3 rounded-lg border border-white/5">
-                    <i data-lucide="clock" class="w-4 h-4 text-brand-red"></i>
-                    <span class="text-gray-400 text-xs font-bold uppercase">До збільшення ціни:</span>
-                    <span class="text-white font-mono font-bold text-lg" id="footer-timer">10:00</span>
+                    <h3 class="text-2xl font-black text-white mb-4 uppercase leading-none">
+                        100% ГАРАНТІЯ <br>
+                        <span class="text-brand-gold">ПОВЕРНЕННЯ</span>
+                    </h3>
+                    
+                    <p class="text-gray-300 text-sm mb-8 font-medium leading-relaxed">
+                        Якщо персональна стратегія не принесе користі — я поверну вам усі 390 грн.
+                    </p>
+
+                    <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                        <span>Хочу персональну стратегію</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
                 </div>
-
-                <p class="text-[10px] text-gray-500 mb-2">
-                    *Гарантія повернення коштів, якщо розбір не буде корисним.
-                </p>
             </div>
 
         </div>
@@ -388,7 +401,7 @@
     <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
-                <span>Хочу свою стратегію</span>
+                <span>Хочу персональну стратегію</span>
                 <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
             </button>
         </div>
@@ -449,7 +462,7 @@
         const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
         const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK_HERE'; 
 
-        // --- TIMER ---
+        // --- TIMER (Only for hero section now) ---
         function startTimer(duration, displays) {
             let timer = duration, minutes, seconds;
             setInterval(function () {
@@ -466,7 +479,7 @@
 
         window.onload = function () {
             const tenMinutes = 60 * 10;
-            const displays = [document.querySelector('#hero-timer'), document.querySelector('#footer-timer')];
+            const displays = [document.querySelector('#hero-timer')];
             startTimer(tenMinutes, displays);
         };
 
