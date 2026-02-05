@@ -28,7 +28,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // ЗАМЕНИТЬ YOUR_PIXEL_ID
+    // ЗАМІНІТЬ YOUR_PIXEL_ID НА ВАШ ID
     fbq('init', 'YOUR_PIXEL_ID'); 
     fbq('track', 'PageView');
     </script>
@@ -48,9 +48,8 @@
                         brand: {
                             red: '#E63946',       // Яскравий червоний
                             darkred: '#9B2226',   // Темно-червоний для ховерів
-                            // UPDATED: Змінено з чорного (#121212) на темно-сірий (#1C1C1C)
-                            bg: '#1C1C1C',        
-                            asphalt: '#262626',   // Асфальтовий колір став трохи світлішим
+                            bg: '#1C1C1C',        // Темно-сірий фон (графіт)
+                            asphalt: '#262626',   // Картки трохи світліші за фон
                             lightgrey: '#333333', 
                             border: '#404040',
                             input: '#2A2A2A',
@@ -71,7 +70,6 @@
     </script>
 
     <style>
-        /* UPDATED: Фон сторінки темно-сірий */
         body { background-color: #1C1C1C; color: #ffffff; }
         
         /* Стилі інпутів */
@@ -95,9 +93,21 @@
         }
         .iti__selected-flag { background-color: #2A2A2A !important; }
         
-        /* Градієнт героя адаптований під сірий фон */
+        /* 
+           ГРАДІЄНТ ДЛЯ ГЕРОЯ:
+           Робить затемнення зліва направо. 
+           Зліва - темний колір фону для тексту.
+           Справа - прозорість, щоб було видно Владу.
+        */
         .hero-gradient {
-            background: linear-gradient(to top, #1C1C1C 5%, rgba(28,28,28,0.8) 40%, rgba(28,28,28,0.1) 100%);
+            background: linear-gradient(90deg, #1C1C1C 20%, rgba(28,28,28,0.85) 55%, rgba(28,28,28,0) 100%);
+        }
+        
+        /* Адаптація градієнта для мобільних */
+        @media (max-width: 768px) {
+            .hero-gradient {
+                background: linear-gradient(90deg, #1C1C1C 45%, rgba(28,28,28,0.7) 75%, rgba(28,28,28,0) 100%);
+            }
         }
 
         /* Glassmorphism для карток */
@@ -130,78 +140,83 @@
         <!-- ФОТО -->
         <div class="absolute inset-0 z-0">
             <!-- 
-               UPDATED: object-position змінено на 'object-[75%_20%]' для мобільних.
-               Це зсуває фото вліво, показуючи праву частину (обличчя).
-               Текст буде зліва і не перекриватиме обличчя.
+               ВАЖЛИВО: Файл має називатися hero-vlada.png (бажано вирізаний на прозорому фоні).
+               object-[80%_100%] означає: 
+               80% по горизонталі (зсув вправо), 100% по вертикалі (притиснути до низу).
             -->
-            <img src="IMG_1520.JPG" 
+            <img src="hero-vlada.png" 
                  alt="Vlada Tsarenko" 
-                 class="w-full h-full object-cover object-[75%_20%] md:object-top opacity-90">
+                 class="w-full h-full object-cover object-[80%_100%] md:object-[center_bottom]">
+            
+            <!-- Градієнт поверх фото -->
             <div class="hero-gradient absolute inset-0"></div>
         </div>
 
-        <div class="container mx-auto px-4 relative z-10 max-w-lg">
+        <div class="container mx-auto px-4 relative z-10 max-w-lg md:max-w-5xl">
             
-            <!-- OFFER -->
-            <!-- UPDATED: max-w-[85%] щоб текст не ліз на праву сторону (на обличчя) -->
-            <div class="mb-8 max-w-[85%] md:max-w-full">
+            <!-- OFFER WRAPPER -->
+            <!-- Обмежуємо ширину на мобільному (w-[70%]), щоб текст був зліва і не закривав Владу справа -->
+            <div class="w-[70%] md:w-[60%] lg:w-[50%] mb-8">
                 <!-- TAG -->
                 <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow">
                     Персональна діагностика
                 </div>
                 
                 <!-- H1 -->
-                <!-- UPDATED: text-4xl для мобільних (було 3xl), щоб було більш читабельно -->
-                <h1 class="text-4xl md:text-5xl font-extrabold leading-[1.05] text-white uppercase drop-shadow-2xl">
+                <h1 class="text-3xl md:text-5xl font-extrabold leading-[1.1] text-white uppercase drop-shadow-2xl">
                     ОТРИМАЙ ПЕРСОНАЛЬНУ <br>
                     <span class="text-brand-red">СТРАТЕГІЮ КОНТЕНТУ</span>,
                     ЯКА ДАЄ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
                 </h1>
                 
                 <!-- SUBTEXT -->
-                <p class="text-gray-200 font-semibold mt-5 text-sm md:text-base leading-relaxed border-l-4 border-brand-red pl-4 bg-black/30 backdrop-blur-sm rounded-r-lg py-2">
+                <p class="text-gray-200 font-semibold mt-5 text-xs md:text-base leading-relaxed border-l-4 border-brand-red pl-4 py-2">
                     З блогу, навіть на малих охопленнях. Без вигорання. За рахунок потужних сторітелів.
                 </p>
             </div>
 
-            <!-- PRICE BLOCK -->
-            <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6">
-                <!-- Анімація світіння фону -->
-                <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <!-- PRICE BLOCK & BUTTON WRAPPER -->
+            <!-- Також обмежуємо ширину блоку ціни -->
+            <div class="w-[85%] md:w-[50%]">
+                
+                <!-- PRICE BLOCK -->
+                <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6">
+                    <!-- Анімація світіння фону -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-3 border-b border-gray-500/30 pb-2">
-                        <span class="flex items-center gap-2 text-[10px] md:text-xs text-red-400 font-bold uppercase tracking-wider animate-pulse">
-                            <span class="w-2 h-2 bg-brand-red rounded-full"></span>
-                            До збільшення ціни:
-                        </span>
-                        <div class="font-mono font-bold text-white text-lg tracking-wider" id="hero-timer">10:00</div>
-                    </div>
-                    
-                    <div class="flex items-end justify-between">
-                        <div>
-                            <div class="text-5xl font-black text-white tracking-tight">390 ₴</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-3 border-b border-gray-500/30 pb-2">
+                            <span class="flex items-center gap-2 text-[10px] md:text-xs text-red-400 font-bold uppercase tracking-wider animate-pulse">
+                                <span class="w-2 h-2 bg-brand-red rounded-full"></span>
+                                До збільшення ціни:
+                            </span>
+                            <div class="font-mono font-bold text-white text-lg tracking-wider" id="hero-timer">10:00</div>
                         </div>
-                        <div class="text-right pb-2">
-                            <div class="text-lg text-gray-400 line-through decoration-brand-red decoration-2 font-bold">1790 ₴</div>
+                        
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-5xl font-black text-white tracking-tight">390 ₴</div>
+                            </div>
+                            <div class="text-right pb-2">
+                                <div class="text-lg text-gray-400 line-through decoration-brand-red decoration-2 font-bold">1790 ₴</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Кнопка (Десктоп) -->
-            <div class="hidden md:block">
-                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу персональну стратегію</span>
-                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                </button>
+                <!-- Кнопка (Тільки Десктоп, бо на мобільному є плаваюча внизу) -->
+                <div class="hidden md:block">
+                     <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                        <span>Хочу персональну стратегію</span>
+                        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
             
         </div>
     </section>
 
     <!-- AGITATION SECTION (PAIN POINTS) -->
-    <!-- UPDATED: Використовує bg-brand-bg (темно-сірий) -->
     <section class="py-20 px-4 bg-brand-bg">
         <div class="max-w-md mx-auto space-y-10">
             <h2 class="text-3xl font-extrabold text-white leading-none uppercase tracking-tight text-center">
@@ -252,7 +267,6 @@
     </section>
 
     <!-- EXPERT SECTION -->
-    <!-- UPDATED: Фон змінено на #222222 (темно-сірий, трохи світліший за фон) -->
     <section class="py-20 px-4 bg-[#222222] border-y border-brand-border relative">
         <div class="max-w-md mx-auto">
             <div class="mb-8 text-center">
@@ -260,9 +274,8 @@
                 <h2 class="text-4xl font-black text-white uppercase">Влада Царенко</h2>
             </div>
 
-            <!-- PHOTO EXPERT -->
+            <!-- PHOTO EXPERT (Тут можна залишити те саме або інше фото) -->
             <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-8 relative shadow-2xl border border-brand-border">
-                 <!-- ЗАМЕНИТЬ ССЫЛКУ -->
                  <img src="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2070&auto=format&fit=crop" 
                      alt="Vlada Tsarenko" 
                      class="w-full h-full object-cover filter contrast-110">
@@ -276,7 +289,6 @@
                 </div>
                 
                 <ul class="space-y-6 mt-6">
-                    <!-- Item 1 -->
                     <li class="flex items-start gap-4">
                         <div class="bg-brand-red/20 p-2 rounded-full text-brand-red shrink-0">
                             <i data-lucide="zap" class="w-5 h-5"></i>
@@ -286,7 +298,6 @@
                             <span class="text-sm text-gray-400">Побудова прогрівів і контенту на малих охопленнях.</span>
                         </div>
                     </li>
-                    <!-- Item 2 -->
                     <li class="flex items-start gap-4">
                         <div class="bg-brand-red/20 p-2 rounded-full text-brand-red shrink-0">
                             <i data-lucide="layers" class="w-5 h-5"></i>
@@ -318,7 +329,7 @@
                     </div>
                 </div>
 
-                <!-- Card 2 (UPDATED) -->
+                <!-- Card 2 -->
                 <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
                     <div class="text-4xl font-black text-brand-red/80 mt-1">02</div>
                     <div>
@@ -327,7 +338,7 @@
                     </div>
                 </div>
 
-                <!-- Card 3 (UPDATED) -->
+                <!-- Card 3 -->
                 <div class="bg-brand-asphalt p-5 rounded-xl border border-brand-border flex items-start gap-5 hover:border-brand-red hover:shadow-glow transition-all duration-300">
                     <div class="text-4xl font-black text-brand-red/80 mt-1">03</div>
                     <div>
@@ -340,7 +351,6 @@
     </section>
 
     <!-- REVIEWS SECTION -->
-    <!-- UPDATED: Фон змінено на #222222 (темно-сірий) -->
     <section class="py-20 bg-[#222222] border-t border-brand-border overflow-hidden">
         <div class="max-w-4xl mx-auto px-4">
             <h2 class="text-2xl font-black text-center mb-8 text-white uppercase tracking-wide">
@@ -407,8 +417,7 @@
         </div>
     </section>
 
-    <!-- FLOATING STICKY CTA BUTTON (MOBILE + DESKTOP) -->
-    <!-- UPDATED: Градієнт кнопки адаптовано під сірий фон -->
+    <!-- FLOATING STICKY CTA BUTTON -->
     <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
@@ -419,7 +428,6 @@
     </div>
 
     <!-- FOOTER -->
-    <!-- UPDATED: Фон #181818 (темно-сірий) -->
     <footer class="bg-[#181818] py-8 text-center text-gray-600 text-[10px] uppercase tracking-widest border-t border-[#333]">
         <p>Влада Царенко &copy; 2025</p>
     </footer>
