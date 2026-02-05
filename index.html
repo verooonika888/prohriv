@@ -48,7 +48,7 @@
                         brand: {
                             red: '#E63946',       
                             darkred: '#9B2226',   
-                            bg: '#1C1C1C',        // Темно-сірий фон
+                            bg: '#1C1C1C',        
                             asphalt: '#262626',   
                             lightgrey: '#333333', 
                             border: '#404040',
@@ -91,25 +91,23 @@
         .iti__selected-flag { background-color: #2A2A2A !important; }
         
         /* 
-           ГРАДІЄНТ (Жорсткий):
-           Темний колір йде до 50%, потім різко переходить у прозорість.
-           Це залишає праву частину чистою для фото.
+           ГРАДІЄНТ:
+           Дуже різкий перехід. Темрява тільки зліва (до 45%), 
+           далі різко прозоро, щоб було видно Владу справа.
         */
         .hero-gradient {
-            background: linear-gradient(90deg, #1C1C1C 30%, rgba(28,28,28,0.9) 55%, transparent 85%);
+            background: linear-gradient(90deg, #1C1C1C 15%, rgba(28,28,28,0.95) 45%, transparent 70%);
         }
 
         /* Glassmorphism */
         .glass-card {
-            background: rgba(40, 40, 40, 0.75);
+            background: rgba(40, 40, 40, 0.85); /* Трохи темніше для кращого контрасту */
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
-        
-        /* Hide Scrollbar */
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -121,28 +119,21 @@
         
         <!-- ФОТО ВЛАДИ -->
         <!-- 
-            right-[-25%] - зсуває Владу вправо, ховаючи лікоть за екран.
-            w-[120%] - робить фото великим на мобільному, щоб її було добре видно.
-            md:right-0 md:w-auto - на комп'ютері стає нормально.
-            z-0 - на задньому плані.
+            right-[-45%] - Дуже сильний зсув вправо. Лікоть/плече обріжеться, але обличчя і тіло будуть вільні від тексту.
+            w-[140%] - Збільшений масштаб, щоб вона була великою.
         -->
         <img src="hero-vlada.png" 
              alt="Vlada Tsarenko" 
-             class="absolute bottom-0 right-[-25%] md:right-0 w-[120%] md:w-auto md:h-[95%] max-w-none object-contain z-0">
+             class="absolute bottom-0 right-[-45%] md:right-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
         
         <!-- ГРАДІЄНТ -->
-        <!-- Тільки зліва направо, щоб закрити текст, але не Владу -->
         <div class="hero-gradient absolute inset-0 z-10 pointer-events-none"></div>
 
         <div class="container mx-auto px-4 relative z-20 max-w-lg md:max-w-5xl">
             
-            <!-- OFFER WRAPPER -->
-            <!-- 
-               w-[55%] - Жорстке обмеження ширини тексту на мобільному.
-               Текст займає тільки 55% екрану зліва.
-               Решта 45% справа гарантовано залишається для Влади.
-            -->
-            <div class="w-[55%] md:w-[60%] lg:w-[50%] mb-8">
+            <!-- OFFER WRAPPER (ТЕКСТ) -->
+            <!-- Залишаємо зліва, вузький (60%), щоб не ліз на Владу -->
+            <div class="w-[60%] md:w-[60%] lg:w-[50%] mb-6">
                 <!-- TAG -->
                 <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow">
                     Персональна діагностика
@@ -161,9 +152,13 @@
                 </p>
             </div>
 
-            <!-- PRICE BLOCK -->
-            <div class="w-[85%] md:w-[50%]">
-                <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6">
+            <!-- PRICE BLOCK WRAPPER (ЦІНА) -->
+            <!-- 
+                w-full flex justify-center: На мобільному розтягується і центрує вміст.
+                md:justify-start: На комп'ютері вертається вліво.
+            -->
+            <div class="w-full md:w-[50%] flex justify-center md:justify-start relative z-30">
+                <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6 w-[95%] max-w-sm">
                     <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                     <div class="relative z-10">
@@ -185,14 +180,14 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Кнопка (Десктоп) -->
-                <div class="hidden md:block">
-                     <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                        <span>Хочу персональну стратегію</span>
-                        <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                    </button>
-                </div>
+            <!-- Кнопка (Десктоп) -->
+            <div class="hidden md:block w-full md:w-[50%]">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу персональну стратегію</span>
+                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                </button>
             </div>
             
         </div>
