@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Персональна Діагностика | Влада Царенко</title>
     
     <!-- Tailwind CSS -->
@@ -106,44 +106,50 @@
         .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Стилі для карток галереї */
+        .gallery-card {
+            background-color: #2A2A2A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
     <!-- HERO SECTION -->
     <section class="relative min-h-[90vh] flex flex-col justify-end pb-12 overflow-hidden bg-brand-bg">
-        
-        <!-- ФОТО ВЛАДИ -->
-        <img src="IMG_1520.JPG" 
+        <img src="hero-vlada.png" 
              alt="Vlada Tsarenko" 
              class="absolute bottom-[-30%] right-[-60%] md:right-0 md:bottom-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
         
-        <!-- ГРАДІЄНТ -->
         <div class="hero-gradient absolute inset-0 z-10 pointer-events-none"></div>
 
         <div class="container mx-auto px-4 relative z-20 max-w-lg md:max-w-5xl">
-            
-            <!-- OFFER WRAPPER (ТЕКСТ) -->
             <div class="w-[60%] md:w-[60%] lg:w-[50%] mb-6">
                 <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow">
                     Персональна діагностика
                 </div>
-                
-                <!-- ОНОВЛЕНИЙ ОФЕР -->
                 <h1 class="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-[1.15] text-white uppercase drop-shadow-2xl">
                     ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
                 </h1>
-                
                 <p class="text-gray-200 font-semibold mt-5 text-xs md:text-base leading-relaxed border-l-4 border-brand-red pl-4 py-2">
                     Отримай персональну діагностику, на якій я детально розберу твої прогріви. Ти отримаєш чіткий покроковий план та всі рекомендації.
                 </p>
             </div>
 
-            <!-- PRICE BLOCK WRAPPER (ЦІНА) -->
             <div class="w-full md:w-[50%] flex justify-start relative z-30">
                 <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6 w-[95%] max-w-sm">
                     <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
                     <div class="relative z-10">
                         <div class="flex items-center justify-between mb-3 border-b border-gray-500/30 pb-2">
                             <span class="flex items-center gap-2 text-[10px] md:text-xs text-red-400 font-bold uppercase tracking-wider animate-pulse">
@@ -152,9 +158,7 @@
                             </span>
                             <div class="font-mono font-bold text-white text-lg tracking-wider" id="hero-timer">10:00</div>
                         </div>
-                        
                         <div class="flex items-end justify-between">
-                            <!-- ЦІНА ЗСУНУТА ДО ЦЕНТРУ КАРТКИ (pl-8) -->
                             <div class="pl-8">
                                 <div class="text-5xl font-black text-white tracking-tight">390 ₴</div>
                             </div>
@@ -166,14 +170,94 @@
                 </div>
             </div>
 
-            <!-- Кнопка (Десктоп) -->
             <div class="hidden md:block w-full md:w-[50%]">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
                     <i data-lucide="arrow-right" class="w-6 h-6"></i>
                 </button>
             </div>
-            
+        </div>
+    </section>
+
+    <!-- NEW SECTION: РЕЗУЛЬТАТИ СТОРІТЕЛІВ (ЗМІНЕНО НА СЛАЙДЕР, КВАДРАТ) -->
+    <section class="py-20 px-4 bg-[#222222] border-b border-brand-border">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-center text-white uppercase leading-tight mb-10">
+                Ось як змінюється ваша ситуація в діректі, <br>
+                <span class="text-brand-red">результати сторітейлів</span>
+            </h2>
+
+            <!-- Контейнер слайдера з кнопками -->
+            <div class="relative group/slider">
+                <!-- Кнопка Вліво -->
+                <button onclick="scrollContainer('storytelling-container', -1)" class="hidden md:flex absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center bg-brand-red rounded-full text-white shadow-glow hover:bg-brand-darkred transition-all">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+
+                <!-- Слайдер (КВАДРАТНИЙ ФОРМАТ) -->
+                <div id="storytelling-container" class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide px-4 md:px-0 scroll-smooth">
+                    
+                    <!-- ФОТО 1 -->
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Result+1" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Результат 1">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <!-- ФОТО 2 -->
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Result+2" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Результат 2">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <!-- ФОТО 3 -->
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Result+3" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Результат 3">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <!-- ФОТО 4 -->
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Result+4" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Результат 4">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <!-- ФОТО 5 -->
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Result+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Результат 5">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <!-- ФОТО 6 -->
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Result+6" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Результат 6">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Кнопка Вправо -->
+                <button onclick="scrollContainer('storytelling-container', 1)" class="hidden md:flex absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center bg-brand-red rounded-full text-white shadow-glow hover:bg-brand-darkred transition-all">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center justify-center gap-2 text-gray-500 mt-2 animate-pulse">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                <p class="text-[10px] uppercase tracking-widest">Гортайте приклади</p>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </div>
         </div>
     </section>
 
@@ -227,84 +311,101 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: MISTAKES & RESULTS GALLERY (ВІДРЕДАГОВАНО) -->
-    <section class="py-20 px-4 bg-[#222222] border-t border-brand-border overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center mb-10">
-            <h2 class="text-2xl md:text-3xl font-extrabold text-white uppercase leading-tight mb-4">
-                Чому твої <span class="text-brand-red">прогріви</span> не працюють і не приносять продажі?
-            </h2>
-            <p class="text-gray-400 text-sm uppercase tracking-wide font-bold">
-                90% експертів роблять одні й ті самі помилки
-            </p>
-        </div>
-
-        <!-- СЛАЙДЕР З ОКРЕМИМИ БЛОКАМИ ФОТОГРАФІЙ -->
-        <div class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-            
-            <!-- ФОТО №1 -->
-            <div class="snap-center shrink-0 w-[60vw] md:w-[250px] aspect-square bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                <!-- ВСТАВТЕ ПОСИЛАННЯ НА ФОТО №1 НИЖЧЕ -->
-                <img src="r1.jpg" alt="Помилка 1">
-                <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
-                </div>
+    <!-- MISTAKES SECTION (TEXT LIST INSTEAD OF SLIDER) -->
+    <section class="py-20 px-4 bg-[#222222] border-t border-brand-border relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white uppercase leading-tight mb-4">
+                    Чому твої <span class="text-brand-red">прогріви</span> не працюють і не приносять продажі?
+                </h2>
+                <p class="text-gray-400 text-sm uppercase tracking-wide font-bold">
+                    90% експертів роблять одні й ті самі помилки
+                </p>
             </div>
 
-            <!-- ФОТО №2 -->
-            <div class="snap-center shrink-0 w-[60vw] md:w-[250px] aspect-square bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                <!-- ВСТАВТЕ ПОСИЛАННЯ НА ФОТО №2 НИЖЧЕ -->
-                <img src="r2.jpg" alt="Помилка 2">
-                <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
+            <div class="space-y-4 max-w-3xl mx-auto">
+                <!-- Point 1 -->
+                <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
+                    <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
+                        <i data-lucide="file-warning" class="w-8 h-8 text-brand-red"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-200 text-base md:text-lg leading-relaxed font-medium">
+                            Працюють по схемах і шаблонах прогріву, <span class="text-white font-bold">не розуміючи який робити контент</span>, щоб він був легкий у сприйнятті для аудиторії, і водночас мотивував людей залишити заявку в директ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Point 2 -->
+                <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
+                    <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
+                        <i data-lucide="shuffle" class="w-8 h-8 text-brand-red"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-200 text-base md:text-lg leading-relaxed font-medium">
+                            <span class="text-white font-bold">В хаосі продають</span>, то якісь дешеві продукти, то починають говорити за основний, втрачаючи логіку і зв’язок із людьми через вічні продажі.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Point 3 -->
+                <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
+                    <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
+                        <i data-lucide="battery-warning" class="w-8 h-8 text-brand-red"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-200 text-base md:text-lg leading-relaxed font-medium">
+                            <span class="text-white font-bold">Не вміють утримувати увагу</span> аудиторії на контенті, люди перевтомлюються і не реагують.
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            <!-- ФОТО №3 -->
-            <div class="snap-center shrink-0 w-[60vw] md:w-[250px] aspect-square bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                <!-- ВСТАВТЕ ПОСИЛАННЯ НА ФОТО №3 НИЖЧЕ -->
-                <img src="r3.jpg" alt="Помилка 3">
-                <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
-                </div>
-            </div>
-
-            <!-- ФОТО №4 -->
-            <div class="snap-center shrink-0 w-[60vw] md:w-[250px] aspect-square bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                <!-- ВСТАВТЕ ПОСИЛАННЯ НА ФОТО №4 НИЖЧЕ -->
-                <img src="r4.jpg" alt="Помилка 4">
-                <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
-                </div>
-            </div>
-
-            <!-- ФОТО №5 -->
-            <div class="snap-center shrink-0 w-[60vw] md:w-[250px] aspect-square bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                <!-- ВСТАВТЕ ПОСИЛАННЯ НА ФОТО №5 НИЖЧЕ -->
-                <img src="r5.jpg" alt="Помилка 5">
-                <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
-                </div>
-            </div>
-
-        </div>
-        <div class="flex items-center justify-center gap-2 text-gray-500 mt-2 animate-pulse">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-            <p class="text-[10px] uppercase tracking-widest">Гортайте приклади</p>
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
         </div>
     </section>
 
-    <!-- EXPERT SECTION -->
-    <section class="py-20 px-4 bg-brand-bg border-y border-brand-border relative">
+    <!-- EXPERTS HIDE THIS -->
+    <section class="py-20 px-4 bg-brand-bg border-t border-brand-border">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-2xl md:text-3xl font-black mb-6 uppercase text-white tracking-wide text-center leading-tight">
+                Експерти на ринку <span class="text-brand-red">приховують це</span>, бо заробляють на тобі
+            </h2>
+            
+            <p class="text-gray-300 text-center mb-10 font-medium leading-relaxed border-b border-brand-border pb-6">
+                Я глибоко аналізую твої прогріви, сторітейли і контент, а на особистому розборі даю чіткі правки і рішення.
+            </p>
+            
+            <div class="grid gap-6">
+                <div class="bg-[#222] p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
+                    <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">01</div>
+                    <h3 class="font-bold text-white text-xl uppercase">Стратегія дій</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Покроковий план під твої цілі і нішу. Без води, тільки те, що дає гроші.</p>
+                </div>
+
+                <div class="bg-[#222] p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
+                    <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">02</div>
+                    <h3 class="font-bold text-white text-xl uppercase">Аудит помилок</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Чому контент не конвертує заявки. Розбір твоїх слабких місць.</p>
+                </div>
+
+                <div class="bg-[#222] p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
+                    <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">03</div>
+                    <h3 class="font-bold text-white text-xl uppercase">Схема прогрівів</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Власна схема прогрівів під тебе, яку ти зможеш впровадити вже завтра.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERT SECTION (Влада Царенко) -->
+    <section class="py-20 px-4 bg-[#222222] relative">
         <div class="max-w-md mx-auto">
             <div class="mb-8 text-center">
                 <span class="text-brand-red text-xs uppercase tracking-[0.2em] font-extrabold block mb-2">Хто веде розбір</span>
                 <h2 class="text-4xl font-black text-white uppercase">Влада Царенко</h2>
             </div>
 
-            <!-- PHOTO EXPERT (ЗБІЛЬШЕНО: w-48 h-48) -->
             <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-8 relative shadow-2xl border-2 border-brand-red/50">
-                 <img src="IMG_1539.JPG" 
+                 <img src="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2070&auto=format&fit=crop" 
                      alt="Vlada Tsarenko" 
                      class="w-full h-full object-cover filter contrast-110">
             </div>
@@ -340,63 +441,64 @@
         </div>
     </section>
 
-    <!-- WHAT YOU GET (UPDATED - STRONG OFFER) -->
-    <section class="py-20 px-4 bg-[#222222]">
-        <div class="max-w-md mx-auto">
-            <h2 class="text-2xl md:text-3xl font-black mb-6 uppercase text-white tracking-wide text-center leading-tight">
-                Експерти на ринку <span class="text-brand-red">приховують це</span>, бо заробляють на тобі
-            </h2>
-            
-            <p class="text-gray-300 text-center mb-10 font-medium leading-relaxed border-b border-brand-border pb-6">
-                Я глибоко аналізую твої прогріви, сторітейли і контент, а на особистому розборі даю чіткі правки і рішення.
-            </p>
-            
-            <div class="grid gap-6">
-                <!-- Card 1 -->
-                <div class="bg-brand-bg p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
-                    <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">01</div>
-                    <h3 class="font-bold text-white text-xl uppercase">Стратегія дій</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Покроковий план під твої цілі і нішу. Без води, тільки те, що дає гроші.</p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-brand-bg p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
-                    <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">02</div>
-                    <h3 class="font-bold text-white text-xl uppercase">Аудит помилок</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Чому контент не конвертує заявки. Розбір твоїх слабких місць.</p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-brand-bg p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
-                    <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">03</div>
-                    <h3 class="font-bold text-white text-xl uppercase">Схема прогрівів</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Власна схема прогрівів під тебе, яку ти зможеш впровадити вже завтра.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- REVIEWS SECTION -->
-    <section class="py-20 bg-brand-bg border-t border-brand-border overflow-hidden">
+    <!-- SYSTEM RESULTS (ЗМІНЕНО НА КВАДРАТ) -->
+    <section class="py-20 bg-brand-bg border-t border-brand-border relative">
         <div class="max-w-4xl mx-auto px-4">
+            <!-- ЗМІНЕНА НАЗВА -->
             <h2 class="text-2xl font-black text-center mb-8 text-white uppercase tracking-wide">
-                Результати <span class="text-brand-red">учнів</span>
+                Результати <span class="text-brand-red">моєї системи</span>
             </h2>
             
-            <div class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-                <script>
-                    for(let i = 1; i <= 15; i++) {
-                        document.write(`
-                            <div class="snap-center shrink-0 w-[70vw] md:w-[250px] aspect-[4/5] bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                                <img src="https://via.placeholder.com/400x500?text=Result+${i}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" alt="Review ${i}">
-                                <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                    <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
-                                </div>
-                            </div>
-                        `);
-                    }
-                </script>
-            </div>
+             <!-- Контейнер слайдера з кнопками -->
+             <div class="relative max-w-5xl mx-auto group/slider">
+                <button onclick="scrollContainer('reviews-container', -1)" class="hidden md:flex absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center bg-brand-red rounded-full text-white shadow-glow hover:bg-brand-darkred transition-all">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+
+                <!-- КВАДРАТНІ КАРТКИ -->
+                <div id="reviews-container" class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide px-4 md:px-0 scroll-smooth">
+                    
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Review+1" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 1">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Review+2" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 2">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Review+3" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 3">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Review+4" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 4">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                        <img src="https://via.placeholder.com/600x600?text=Review+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 5">
+                        <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button onclick="scrollContainer('reviews-container', 1)" class="hidden md:flex absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center bg-brand-red rounded-full text-white shadow-glow hover:bg-brand-darkred transition-all">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+             </div>
             
             <div class="flex items-center justify-center gap-2 text-gray-500 mt-2 animate-pulse">
                 <i data-lucide="chevron-left" class="w-4 h-4"></i>
@@ -481,13 +583,14 @@
     </div>
 
     <!-- IMAGE LIGHTBOX -->
-    <div id="image-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity" onclick="closeImageModal()"></div>
-        <div class="relative w-full max-w-4xl h-full max-h-[90vh] flex items-center justify-center">
-            <button onclick="closeImageModal()" class="absolute top-4 right-4 z-50 p-2 bg-brand-red/80 rounded-full text-white hover:bg-brand-red">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            <img id="lightbox-image" src="" alt="Review Fullscreen" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-gray-800">
+    <div id="image-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-2 bg-black/95 backdrop-blur-md transition-opacity">
+        <button onclick="closeImageModal()" class="absolute top-4 right-4 z-50 p-3 bg-brand-red rounded-full text-white shadow-lg hover:bg-red-600 transition-colors">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <div class="w-full h-full flex items-center justify-center overflow-auto" onclick="closeImageModal()">
+             <img id="lightbox-image" src="" alt="Full Screen" 
+                  class="max-w-[95vw] max-h-[90vh] object-contain rounded shadow-2xl transition-transform"
+                  onclick="event.stopPropagation()">
         </div>
     </div>
 
@@ -498,11 +601,10 @@
     <script>
         lucide.createIcons();
 
-        // --- CONFIGURATION ---
         const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
         const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK_HERE'; 
 
-        // --- TIMER ---
+        // TIMER
         function startTimer(duration, displays) {
             let timer = duration, minutes, seconds;
             setInterval(function () {
@@ -523,7 +625,7 @@
             startTimer(tenMinutes, displays);
         };
 
-        // --- PHONE INPUT ---
+        // PHONE INPUT
         const input = document.querySelector("#phone");
         const iti = window.intlTelInput(input, {
             initialCountry: "auto",
@@ -537,7 +639,7 @@
             separateDialCode: true
         });
 
-        // --- MODALS ---
+        // MODALS
         const modal = document.getElementById('modal');
         function openModal() {
             modal.classList.remove('hidden');
@@ -547,7 +649,7 @@
             modal.classList.add('hidden');
         }
 
-        // --- LIGHTBOX LOGIC ---
+        // LIGHTBOX
         const imageModal = document.getElementById('image-modal');
         const lightboxImage = document.getElementById('lightbox-image');
 
@@ -562,7 +664,22 @@
             imageModal.classList.add('hidden');
         }
 
-        // --- SUBMISSION ---
+        // CAROUSEL SCROLL
+        function scrollContainer(id, direction) {
+            const container = document.getElementById(id);
+            const scrollAmount = 340; 
+            if (direction === 1 && (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10)) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } 
+            else if (direction === -1 && container.scrollLeft <= 10) {
+                 container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
+            }
+            else {
+                container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+            }
+        }
+
+        // SUBMISSION
         const form = document.getElementById('leadForm');
         const submitBtn = document.getElementById('submitBtn');
         const errorMsg = document.getElementById('phone-error');
