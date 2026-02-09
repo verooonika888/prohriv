@@ -124,7 +124,6 @@
         }
     </style>
 </head>
-<!-- ДОДАНО ВІДСТУП ЗВЕРХУ (pt-12) ЗАМІСТЬ ХЕДЕРА -->
 <body class="antialiased overflow-x-hidden pb-24 pt-12">
 
     <!-- HERO SECTION -->
@@ -180,7 +179,7 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: РЕЗУЛЬТАТИ СТОРІТЕЛІВ (СЛАЙДЕР, КВАДРАТ, НЕСКІНЧЕННИЙ) -->
+    <!-- NEW SECTION: РЕЗУЛЬТАТИ СТОРІТЕЛІВ (СЛАЙДЕР, КВАДРАТ, НЕСКІНЧЕННИЙ, БЕЗ РЫВКОВ) -->
     <section class="py-20 px-4 bg-[#222222] border-b border-brand-border">
         <div class="max-w-5xl mx-auto">
             <h2 class="text-2xl md:text-3xl font-extrabold text-center text-white uppercase leading-tight mb-10">
@@ -195,12 +194,11 @@
                     <i data-lucide="chevron-left" class="w-6 h-6"></i>
                 </button>
 
-                <!-- Слайдер (КВАДРАТНИЙ ФОРМАТ) -->
-                <!-- Прибрано scroll-smooth з класів, щоб JS міг робити миттєві стрибки -->
-                <div id="storytelling-container" class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide px-4 md:px-0">
+                <!-- Слайдер (ПРИБРАНО snap-x та snap-mandatory для плавності) -->
+                <div id="storytelling-container" class="flex overflow-x-auto gap-4 pb-8 scrollbar-hide px-4 md:px-0">
                     
                     <!-- ФОТО 1 -->
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="1.jpg" alt="Результат 1">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
@@ -208,7 +206,7 @@
                     </div>
 
                     <!-- ФОТО 2 -->
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="5.jpg" alt="Результат 2">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
@@ -216,7 +214,7 @@
                     </div>
 
                     <!-- ФОТО 3 -->
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="3.jpg" alt="Результат 3">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
@@ -224,7 +222,7 @@
                     </div>
 
                     <!-- ФОТО 4 -->
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="4.jpg" alt="Результат 4">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
@@ -232,7 +230,7 @@
                     </div>
 
                     <!-- ФОТО 5 -->
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="2.jpg" alt="Результат 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
@@ -240,7 +238,7 @@
                     </div>
 
                     <!-- ФОТО 6 -->
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="6.jpg" alt="Результат 6">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
@@ -443,7 +441,7 @@
         </div>
     </section>
 
-    <!-- SYSTEM RESULTS (ЗМІНЕНО НА КВАДРАТ, НЕСКІНЧЕННИЙ) -->
+    <!-- SYSTEM RESULTS (ЗМІНЕНО НА КВАДРАТ, НЕСКІНЧЕННИЙ, БЕЗ РЫВКОВ) -->
     <section class="py-20 bg-brand-bg border-t border-brand-border relative">
         <div class="max-w-4xl mx-auto px-4">
             <!-- ЗМІНЕНА НАЗВА -->
@@ -457,69 +455,68 @@
                     <i data-lucide="chevron-left" class="w-6 h-6"></i>
                 </button>
 
-                <!-- КВАДРАТНІ КАРТКИ -->
-                <!-- Прибрано scroll-smooth з класів -->
-                <div id="reviews-container" class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide px-4 md:px-0">
+                <!-- КВАДРАТНІ КАРТКИ (ПРИБРАНО snap-x та snap-mandatory) -->
+                <div id="reviews-container" class="flex overflow-x-auto gap-4 pb-8 scrollbar-hide px-4 md:px-0">
                     
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+1" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 1">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+2" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 2">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+3" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 3">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+4" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 4">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                      </div>
-                     <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                      </div>
-                     <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-                     <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                      </div>
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                      </div>
-                    <div class="snap-center shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
+                    <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="https://via.placeholder.com/600x600?text=Review+5" class="gallery-image opacity-90 group-hover:opacity-100 transition-opacity" alt="Review 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
@@ -653,34 +650,42 @@
             }, 1000);
         }
 
-        // INFINITE SCROLL LOGIC
+        // IMPROVED INFINITE SCROLL LOGIC (NO JAMMING)
         function setupInfiniteScroll(id) {
             const container = document.getElementById(id);
             if (!container) return;
             
-            // Дублюємо контент, щоб було достатньо елементів для прокрутки
-            // Структура стає [Оригінал] [Клон]
-            const originalContent = container.innerHTML;
-            container.innerHTML = originalContent + originalContent;
+            // Дублюємо контент 3 рази для створення буферної зони
+            // Лівий буфер | Центральна зона (де користувач) | Правий буфер
+            const content = container.innerHTML;
+            container.innerHTML = content + content + content;
             
-            // Функція скидання скролу
-            const resetScroll = () => {
-                // Половина ширини всього контенту (це ширина одного набору карток)
-                const halfWidth = container.scrollWidth / 2;
+            // Центруємо користувача після завантаження
+            const centerPosition = () => {
+                container.scrollLeft = container.scrollWidth / 3;
+            };
+
+            // Функція обробки скролу
+            const handleScroll = () => {
+                const totalWidth = container.scrollWidth;
+                const oneThird = totalWidth / 3;
                 
-                // Якщо прокрутили далі половини (тобто зайшли на клони)
-                if (container.scrollLeft >= halfWidth) {
-                    // Миттєво перекидаємо на початок, віднімаючи половину ширини
-                    container.scrollLeft = container.scrollLeft - halfWidth;
+                // Якщо користувач доскролив до кінця другої третини (початок правого буфера)
+                if (container.scrollLeft >= oneThird * 2) { 
+                    // Непомітно перекидаємо назад на одну третину
+                    container.scrollLeft -= oneThird;
                 } 
-                // Якщо прокрутили в самий початок (вліво за нуль)
-                else if (container.scrollLeft <= 0) {
-                     // Перекидаємо в кінець першого набору
-                     container.scrollLeft = container.scrollLeft + halfWidth;
+                // Якщо користувач доскролив до початку першої третини (кінець лівого буфера)
+                else if (container.scrollLeft <= 50) { 
+                    // Непомітно перекидаємо вперед на одну третину
+                    container.scrollLeft += oneThird;
                 }
             };
 
-            container.addEventListener('scroll', resetScroll);
+            container.addEventListener('scroll', handleScroll);
+            
+            // Встановлюємо початкову позицію
+            setTimeout(centerPosition, 100);
         }
 
         window.onload = function () {
@@ -732,7 +737,7 @@
             imageModal.classList.add('hidden');
         }
 
-        // CAROUSEL SCROLL (Оновлено: кнопки крутять плавно, а ліснер обробляє петлю)
+        // CAROUSEL SCROLL
         function scrollContainer(id, direction) {
             const container = document.getElementById(id);
             const scrollAmount = 340; 
