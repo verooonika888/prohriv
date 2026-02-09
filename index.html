@@ -129,9 +129,9 @@
                     Персональна діагностика
                 </div>
                 
+                <!-- ОНОВЛЕНИЙ ОФЕР -->
                 <h1 class="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-[1.15] text-white uppercase drop-shadow-2xl">
-                    ОТРИМАЙ <span class="text-brand-red">ПОВНИЙ РОЗБІР</span> СВОЇХ <span class="text-brand-red">ПРОГРІВІВ</span>
-                    ТА СИСТЕМУ КОНТЕНТУ, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
+                    ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
                 </h1>
                 
                 <p class="text-gray-200 font-semibold mt-5 text-xs md:text-base leading-relaxed border-l-4 border-brand-red pl-4 py-2">
@@ -140,7 +140,6 @@
             </div>
 
             <!-- PRICE BLOCK WRAPPER (ЦІНА) -->
-            <!-- Повернув вирівнювання justify-start (зліва) -->
             <div class="w-full md:w-[50%] flex justify-start relative z-30">
                 <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6 w-[95%] max-w-sm">
                     <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -240,12 +239,13 @@
         </div>
 
         <!-- Slider with 5 photos -->
+        <!-- ЗМІНЕНО НА КВАДРАТНИЙ ФОРМАТ (aspect-square) І КОМПАКТНИЙ РОЗМІР -->
         <div class="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
             <script>
                 for(let i = 1; i <= 5; i++) {
                     document.write(`
-                        <div class="snap-center shrink-0 w-[80vw] md:w-[300px] aspect-[9/16] bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
-                            <img src="https://via.placeholder.com/400x700?text=Mistake+${i}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" alt="Mistake ${i}">
+                        <div class="snap-center shrink-0 w-[60vw] md:w-[250px] aspect-square bg-brand-lightgrey rounded-xl overflow-hidden cursor-pointer border border-brand-border hover:border-brand-red transition-all relative group" onclick="openImageModal(this)">
+                            <img src="https://via.placeholder.com/500x500?text=Mistake+${i}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" alt="Mistake ${i}">
                             <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <i data-lucide="zoom-in" class="text-white w-8 h-8 opacity-70"></i>
                             </div>
@@ -269,8 +269,8 @@
                 <h2 class="text-4xl font-black text-white uppercase">Влада Царенко</h2>
             </div>
 
-            <!-- PHOTO EXPERT (ЗМЕНШЕНЕ: w-32 h-32) -->
-            <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-8 relative shadow-2xl border-2 border-brand-red/50">
+            <!-- PHOTO EXPERT (ЗБІЛЬШЕНО: w-48 h-48) -->
+            <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-8 relative shadow-2xl border-2 border-brand-red/50">
                  <img src="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2070&auto=format&fit=crop" 
                      alt="Vlada Tsarenko" 
                      class="w-full h-full object-cover filter contrast-110">
