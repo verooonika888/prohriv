@@ -126,21 +126,25 @@
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
-    <!-- HERO SECTION (UPDATED PHOTO POSITION) -->
+    <!-- HERO SECTION (UPDATED PHOTO POSITION - FORCED) -->
     <section class="relative min-h-[100dvh] flex flex-col justify-end pb-8 overflow-hidden bg-brand-bg">
         
-        <!-- Фонове зображення: Заповнює весь екран -->
-        <div class="absolute inset-0 z-0">
-            <!-- object-[center_20%] піднімає фото ще вище -->
+        <!-- Фонове зображення -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <!-- 
+               1. scale-[1.15] - збільшуємо фото на 15%, щоб не було порожніх країв при зсуві.
+               2. -translate-y-[15%] - піднімаємо фото вгору на 15% його висоти. Це гарантовано підніме обличчя.
+               3. object-top - пріоритет на верхню частину.
+            -->
             <img src="IMG_1520.JPG" 
                  alt="Vlada Tsarenko" 
-                 class="w-full h-full object-cover object-[center_20%]">
+                 class="w-full h-full object-cover object-top transform scale-[1.15] -translate-y-[15%]">
             
-            <!-- Градієнт: Прозорий зверху (для обличчя), темний знизу (для тексту) -->
+            <!-- Градієнт -->
             <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/90 to-transparent z-10"></div>
         </div>
 
-        <!-- Контейнер контенту: Центрований, внизу екрану -->
+        <!-- Контейнер контенту -->
         <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center">
             
             <!-- Бейдж -->
@@ -743,56 +747,3 @@
 
         // CAROUSEL SCROLL
         function scrollContainer(id, direction) {
-            const container = document.getElementById(id);
-            const scrollAmount = 340; 
-            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-        }
-
-        // SUBMISSION
-        const form = document.getElementById('leadForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const errorMsg = document.getElementById('phone-error');
-
-        function getUTM() {
-            const params = new URLSearchParams(window.location.search);
-            return {
-                source: params.get('utm_source') || '',
-                medium: params.get('utm_medium') || '',
-                campaign: params.get('utm_campaign') || '',
-                content: params.get('utm_content') || '',
-                term: params.get('utm_term') || ''
-            };
-        }
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            errorMsg.classList.add('hidden');
-            if (!iti.isValidNumber()) {
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'ОБРОБКА...';
-            const formData = {
-                date: new Date().toLocaleString("uk-UA"),
-                name: document.getElementById('name').value,
-                phone: iti.getNumber(),
-                ...getUTM()
-            };
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            }).then(() => {
-                fbq('track', 'Lead');
-                window.location.href = TELEGRAM_BOT_URL;
-            }).catch(err => {
-                console.error('Error:', err);
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'СПРОБУВАТИ ЩЕ РАЗ';
-            });
-        });
-    </script>
-</body>
-</html>
