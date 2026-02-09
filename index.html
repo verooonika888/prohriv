@@ -90,7 +90,7 @@
         }
         .iti__selected-flag { background-color: #2A2A2A !important; }
         
-        /* ГРАДІЄНТ: Різкий перехід, щоб відкрити праву частину */
+        /* ГРАДІЄНТ */
         .hero-gradient {
             background: linear-gradient(90deg, #1C1C1C 15%, rgba(28,28,28,0.95) 45%, transparent 70%);
         }
@@ -114,14 +114,9 @@
     <section class="relative min-h-[90vh] flex flex-col justify-end pb-12 overflow-hidden bg-brand-bg">
         
         <!-- ФОТО ВЛАДИ -->
-        <!-- 
-            bottom-[-15%]: Опускає картинку вниз, щоб голова не обрізалась зверху.
-            right-[-45%]: Сильний зсув вправо, щоб звільнити місце для тексту.
-            w-[140%]: Великий розмір фото.
-        -->
-        <img src="IMG_1520.JPG" 
+        <img src="hero-vlada.png" 
              alt="Vlada Tsarenko" 
-             class="absolute bottom-[-15%] right-[-45%] md:right-0 md:bottom-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
+             class="absolute bottom-[-30%] right-[-45%] md:right-0 md:bottom-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
         
         <!-- ГРАДІЄНТ -->
         <div class="hero-gradient absolute inset-0 z-10 pointer-events-none"></div>
@@ -134,10 +129,9 @@
                     Персональна діагностика
                 </div>
                 
-                <h1 class="text-3xl md:text-5xl font-extrabold leading-[1.1] text-white uppercase drop-shadow-2xl">
-                    ОТРИМАЙ ПЕРСОНАЛЬНУ <br>
-                    <span class="text-brand-red">СТРАТЕГІЮ КОНТЕНТУ</span>,
-                    ЯКА ДАЄ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
+                <h1 class="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-[1.15] text-white uppercase drop-shadow-2xl">
+                    ОТРИМАЙ <span class="text-brand-red">ПОВНИЙ РОЗБІР</span> СВОЇХ <span class="text-brand-red">ПРОГРІВІВ</span>
+                    ТА СИСТЕМУ КОНТЕНТУ, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
                 </h1>
                 
                 <p class="text-gray-200 font-semibold mt-5 text-xs md:text-base leading-relaxed border-l-4 border-brand-red pl-4 py-2">
@@ -174,7 +168,7 @@
             <!-- Кнопка (Десктоп) -->
             <div class="hidden md:block w-full md:w-[50%]">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-xl py-5 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу персональну стратегію</span>
+                    <span>Хочу розбір прогрівів</span>
                     <i data-lucide="arrow-right" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -196,9 +190,9 @@
                         <i data-lucide="alert-circle" class="w-24 h-24"></i>
                     </div>
                     <div class="relative z-10">
-                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Дії не призводять до бажаних продажів</h3>
+                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Теперішні прогріви не працюють</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">
-                            Є результати, але нестабільні. Дохід то злітає, то падає. Немає чіткого розуміння "що робити в контенті, щоб приходили потенційні клієнти".
+                            Аудиторія яка заходить, або звикає до продаючого контенту, або відписується. Немає відчуття терміновості, цінності й бажання купити саме зараз.
                         </p>
                     </div>
                 </div>
@@ -209,9 +203,9 @@
                         <i data-lucide="bar-chart-2" class="w-24 h-24"></i>
                     </div>
                     <div class="relative z-10">
-                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Малі охоплення</h3>
+                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Нечітка система і хаос в контенті</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">
-                            Здається, що ще недостатньо розвинений блог для стабільного потоку заявок.
+                            Немає чіткої моделі як лайтово робити дожими через прогріви коли люди вагаються. Запуск то один нормально, то інший мінусовий. Сенси або повторюються або губляться.
                         </p>
                     </div>
                 </div>
@@ -222,9 +216,9 @@
                         <i data-lucide="brain-circuit" class="w-24 h-24"></i>
                     </div>
                     <div class="relative z-10">
-                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Хаос і протиріччя у голові</h3>
+                        <h3 class="font-bold text-white text-lg md:text-xl mb-3 leading-tight uppercase">Страх малих охоплень</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">
-                            Як транслювати свої справжні грані особистості та цінності, а не заїжджені скрипти і фрази, щоб залучити нових людей, які будуть купувати.
+                            Є відчуття, що заявок немає, бо «маленький блог». Відкладаєш сильні продажі на потім: коли буде більше людей, більше переглядів, більше активності. Але навіть ті, хто вже дивляться — не купують. І з’являється сумнів у всьому починаючи від контенту закінчуючи попитом.
                         </p>
                     </div>
                 </div>
@@ -242,7 +236,7 @@
 
             <!-- PHOTO EXPERT -->
             <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-8 relative shadow-2xl border border-brand-border">
-                 <img src="IMG_1539.JPG" 
+                 <img src="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2070&auto=format&fit=crop" 
                      alt="Vlada Tsarenko" 
                      class="w-full h-full object-cover filter contrast-110">
             </div>
@@ -366,7 +360,7 @@
                     </p>
 
                     <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                        <span>Хочу персональну стратегію</span>
+                        <span>Хочу розбір прогрівів</span>
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -378,7 +372,7 @@
     <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
-                <span>Хочу персональну стратегію</span>
+                <span>Хочу розбір прогрівів</span>
                 <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
             </button>
         </div>
