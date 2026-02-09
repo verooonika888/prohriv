@@ -90,7 +90,7 @@
         }
         .iti__selected-flag { background-color: #2A2A2A !important; }
         
-        /* ГРАДІЄНТ */
+        /* ГРАДІЄНТ: Темніше зліва, прозоро справа */
         .hero-gradient {
             background: linear-gradient(90deg, #1C1C1C 15%, rgba(28,28,28,0.95) 45%, transparent 70%);
         }
@@ -114,9 +114,15 @@
     <section class="relative min-h-[90vh] flex flex-col justify-end pb-12 overflow-hidden bg-brand-bg">
         
         <!-- ФОТО ВЛАДИ -->
-        <img src="IMG_1520.JPG" 
+        <!-- 
+            ЗМІНИ:
+            right-[-60%] - Зсунуто ще сильніше вправо.
+            bottom-[-30%] - Опущено вниз, щоб голова не обрізалась зверху.
+            Тепер на мобільному обличчя має бути видно повністю справа.
+        -->
+        <img src="hero-vlada.png" 
              alt="Vlada Tsarenko" 
-             class="absolute bottom-[-30%] right-[-45%] md:right-0 md:bottom-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
+             class="absolute bottom-[-30%] right-[-60%] md:right-0 md:bottom-0 w-[140%] md:w-auto md:h-[95%] max-w-none object-contain z-0 pointer-events-none">
         
         <!-- ГРАДІЄНТ -->
         <div class="hero-gradient absolute inset-0 z-10 pointer-events-none"></div>
@@ -139,8 +145,12 @@
                 </p>
             </div>
 
-            <!-- PRICE BLOCK WRAPPER (ЦІНА) - По центру на мобільному -->
-            <div class="w-full md:w-[50%] flex justify-center md:justify-start relative z-30">
+            <!-- PRICE BLOCK WRAPPER (ЦІНА) -->
+            <!-- 
+               ml-auto mr-auto: центрування блоку. 
+               translate-x-[15%]: невеликий зсув вправо для балансу. 
+            -->
+            <div class="w-full md:w-[50%] flex justify-center md:justify-start relative z-30 translate-x-[15%] md:translate-x-0">
                 <div class="glass-card rounded-xl p-5 shadow-glow relative overflow-hidden group mb-6 w-[95%] max-w-sm">
                     <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -234,8 +244,13 @@
                 <h2 class="text-4xl font-black text-white uppercase">Влада Царенко</h2>
             </div>
 
-            <!-- PHOTO EXPERT -->
-            <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-8 relative shadow-2xl border border-brand-border">
+            <!-- PHOTO EXPERT (ЗМЕНШЕНЕ) -->
+            <!-- 
+                ЗМІНИ:
+                w-48 h-48: Фото зменшено до квадрату ~200px.
+                mx-auto: Центрування.
+            -->
+            <div class="w-48 h-48 mx-auto rounded-xl overflow-hidden mb-8 relative shadow-2xl border border-brand-border">
                  <img src="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2070&auto=format&fit=crop" 
                      alt="Vlada Tsarenko" 
                      class="w-full h-full object-cover filter contrast-110">
