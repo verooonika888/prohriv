@@ -124,7 +124,21 @@
         }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden pb-24">
+<body class="antialiased overflow-x-hidden pb-24 pt-16">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#1C1C1C]/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between max-w-5xl">
+            <div class="flex items-center gap-2">
+                <div class="text-white font-black text-lg md:text-xl uppercase tracking-wider">
+                    Влада <span class="text-brand-red">Царенко</span>
+                </div>
+            </div>
+            <button onclick="openModal()" class="bg-brand-red hover:bg-brand-darkred text-white text-[10px] md:text-xs font-bold py-2 px-4 rounded shadow-glow uppercase tracking-widest transition-all hover:scale-105 border border-white/10">
+                Записатися
+            </button>
+        </div>
+    </header>
 
     <!-- HERO SECTION -->
     <section class="relative min-h-[90vh] flex flex-col justify-end pb-12 overflow-hidden bg-brand-bg">
@@ -650,10 +664,50 @@
             }, 1000);
         }
 
+        // INFINITE SCROLL LOGIC
+        function setupInfiniteScroll(id) {
+            const container = document.getElementById(id);
+            if (!container) return;
+            
+            // Дублюємо контент 2 рази, щоб отримати структуру: [Клон][Оригінал][Клон]
+            // Це дозволяє скролити безкінечно в обидва боки
+            const content = container.innerHTML;
+            container.innerHTML = content + content + content;
+            
+            // Функція обробки скролу
+            const handleScroll = () => {
+                const totalScrollWidth = container.scrollWidth;
+                const oneSetWidth = totalScrollWidth / 3;
+                
+                // Якщо доскролили до лівого краю (початок першого клону)
+                if (container.scrollLeft < 50) { 
+                    // Стрибаємо в кінець центрального блоку (початок правого клону - ширина одного блоку)
+                    container.scrollLeft = container.scrollLeft + oneSetWidth;
+                } 
+                // Якщо доскролили до кінця центрального блоку (початок правого клону)
+                else if (container.scrollLeft >= oneSetWidth * 2) { 
+                    // Стрибаємо на початок центрального блоку
+                    container.scrollLeft = container.scrollLeft - oneSetWidth;
+                }
+            };
+
+            container.addEventListener('scroll', handleScroll);
+            
+            // Встановлюємо початкову позицію по центру (на початок оригінального блоку)
+            // Використовуємо setTimeout, щоб дати браузеру час відрендерити елементи
+            setTimeout(() => {
+                container.scrollLeft = container.scrollWidth / 3;
+            }, 100);
+        }
+
         window.onload = function () {
             const tenMinutes = 60 * 10;
             const displays = [document.querySelector('#hero-timer')];
             startTimer(tenMinutes, displays);
+            
+            // Ініціалізація нескінченної прокрутки
+            setupInfiniteScroll('storytelling-container');
+            setupInfiniteScroll('reviews-container');
         };
 
         // PHONE INPUT
@@ -695,19 +749,12 @@
             imageModal.classList.add('hidden');
         }
 
-        // CAROUSEL SCROLL
+        // CAROUSEL SCROLL (Оновлено для безкінечної прокрутки)
         function scrollContainer(id, direction) {
             const container = document.getElementById(id);
             const scrollAmount = 340; 
-            if (direction === 1 && (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10)) {
-                container.scrollTo({ left: 0, behavior: 'smooth' });
-            } 
-            else if (direction === -1 && container.scrollLeft <= 10) {
-                 container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
-            }
-            else {
-                container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-            }
+            // Просто скролимо, бо обробник подій setupInfiniteScroll сам телепортує позицію, якщо дійдемо до краю
+            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
         }
 
         // SUBMISSION
