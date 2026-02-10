@@ -809,10 +809,22 @@
         }
 
         // Функція виклику WayForPay
+// Функція виклику WayForPay
         function pay(orderData) {
-            // Беремо ціну з глобальної змінної, яка встановлена через initPrice()
-            // Це захист від підміни
+            // Беремо ціну з глобальної змінної
             const safeAmount = String(currentPriceObj.current);
+
+            // SAVE DATA TO LOCALSTORAGE FOR SUCCESS/FAIL PAGES
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentUid = urlParams.get('uid') || 'default';
+            localStorage.setItem('wfp_uid', currentUid);
+            localStorage.setItem('wfp_amount', safeAmount);
+
+            // Define Return URLs (Absolute paths needed)
+            // Replace 'https://prohrivvladyslava.vercel.app' with your actual domain if different
+            const DOMAIN = 'https://prohrivvladyslava.vercel.app'; 
+            const successUrl = DOMAIN + '/success.html';
+            const failUrl = DOMAIN + '/failed.html';
 
             var wayforpay = new Wayforpay();
             wayforpay.run({
@@ -822,23 +834,26 @@
                 merchantSignature : "", 
                 orderReference : orderData.orderId, 
                 orderDate :  Math.floor(Date.now() / 1000),
-                amount : safeAmount, // Використовуємо динамічну безпечну ціну
+                amount : safeAmount, 
                 currency : "UAH",
                 productName : ["Персональна Діагностика"],
-                productPrice : [safeAmount], // Використовуємо динамічну безпечну ціну
+                productPrice : [safeAmount], 
                 productCount : ["1"],
                 clientFirstName : orderData.name,
                 clientPhone: orderData.phone,
-                language: "UA"
+                language: "UA",
+                // REDIRECT URLS
+                returnUrl: successUrl, // Where to go on success
+                serviceUrl: GOOGLE_SCRIPT_URL // (Optional) Server-to-server callback, but we use client-side update for simplicity in Step 1
             },
             function (response) {
-                // on approved
-                fbq('track', 'Purchase', {value: safeAmount, currency: 'UAH'});
-                window.location.href = "YOUR_THANK_YOU_PAGE_URL"; 
+                // on approved (Widget callback)
+                // Sometimes widget doesn't redirect automatically, so we force it
+                window.location.href = successUrl + "?orderReference=" + orderData.orderId;
             },
             function (response) {
                 // on declined
-                console.log("Payment declined");
+                window.location.href = failUrl;
             },
             function (response) {
                 // on pending or other error
