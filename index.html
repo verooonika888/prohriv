@@ -60,6 +60,7 @@
                         'glow': '0 0 20px rgba(230, 57, 70, 0.4)',
                         'card': '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
                         'gold-glow': '0 0 20px rgba(255, 215, 0, 0.2)',
+                        'text-hard': '0 4px 4px rgba(0, 0, 0, 0.8)', 
                     },
                 }
             }
@@ -122,23 +123,27 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Спеціальна тінь для тексту */
+        .text-shadow-strong {
+            text-shadow: 0 4px 10px rgba(0,0,0,0.9);
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
-    <!-- HERO SECTION (UPDATED PHOTO POSITION - FORCED) -->
+    <!-- HERO SECTION -->
     <section class="relative min-h-[100dvh] flex flex-col justify-end pb-8 overflow-hidden bg-brand-bg">
         
         <!-- Фонове зображення -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <!-- 
-               1. scale-[1.15] - збільшуємо фото на 15%, щоб не було порожніх країв при зсуві.
-               2. -translate-y-[15%] - піднімаємо фото вгору на 15% його висоти. Це гарантовано підніме обличчя.
-               3. object-top - пріоритет на верхню частину.
+               object-top: притискає фото до верху (голову не обрізає).
+               Прибрано scale і translate, щоб фото було природнім і не вилазило за межі.
             -->
             <img src="IMG_1520.JPG" 
                  alt="Vlada Tsarenko" 
-                 class="w-full h-full object-cover object-top transform scale-[1.15] -translate-y-[15%]">
+                 class="w-full h-full object-cover object-top">
             
             <!-- Градієнт -->
             <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/90 to-transparent z-10"></div>
@@ -152,8 +157,8 @@
                 Персональна діагностика
             </div>
 
-            <!-- Головний Оффер -->
-            <h1 class="text-3xl md:text-5xl font-black leading-[1.1] text-white uppercase drop-shadow-2xl mb-4">
+            <!-- Головний Оффер (Жирніший шрифт і тінь) -->
+            <h1 class="text-3xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-4 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
 
@@ -187,7 +192,7 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: РЕЗУЛЬТАТИ СТОРІТЕЛІВ (СЛАЙДЕР, КВАДРАТ, НЕСКІНЧЕННИЙ, БЕЗ РЫВКОВ) -->
+    <!-- NEW SECTION: РЕЗУЛЬТАТИ СТОРІТЕЛІВ -->
     <section class="py-20 px-4 bg-[#222222] border-b border-brand-border">
         <div class="max-w-5xl mx-auto">
             <h2 class="text-2xl md:text-3xl font-extrabold text-center text-white uppercase leading-tight mb-10">
@@ -202,7 +207,7 @@
                     <i data-lucide="chevron-left" class="w-6 h-6"></i>
                 </button>
 
-                <!-- Слайдер (ПРИБРАНО snap-x та snap-mandatory для плавності) -->
+                <!-- Слайдер -->
                 <div id="storytelling-container" class="flex overflow-x-auto gap-4 pb-8 scrollbar-hide px-4 md:px-0">
                     
                     <!-- ФОТО 1 -->
@@ -319,7 +324,7 @@
         </div>
     </section>
 
-    <!-- MISTAKES SECTION (TEXT LIST INSTEAD OF SLIDER) -->
+    <!-- MISTAKES SECTION (TEXT LIST WITH ICONS RETURNED) -->
     <section class="py-20 px-4 bg-[#222222] border-t border-brand-border relative">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
@@ -334,6 +339,7 @@
             <div class="space-y-4 max-w-3xl mx-auto">
                 <!-- Point 1 -->
                 <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
+                    <!-- ЗНАЧОК ПОВЕРНУТО -->
                     <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
                         <i data-lucide="file-warning" class="w-8 h-8 text-brand-red"></i>
                     </div>
@@ -346,6 +352,7 @@
 
                 <!-- Point 2 -->
                 <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
+                     <!-- ЗНАЧОК ПОВЕРНУТО -->
                     <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
                         <i data-lucide="shuffle" class="w-8 h-8 text-brand-red"></i>
                     </div>
@@ -358,6 +365,7 @@
 
                 <!-- Point 3 -->
                 <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
+                     <!-- ЗНАЧОК ПОВЕРНУТО -->
                     <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
                         <i data-lucide="battery-warning" class="w-8 h-8 text-brand-red"></i>
                     </div>
@@ -747,3 +755,56 @@
 
         // CAROUSEL SCROLL
         function scrollContainer(id, direction) {
+            const container = document.getElementById(id);
+            const scrollAmount = 340; 
+            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
+
+        // SUBMISSION
+        const form = document.getElementById('leadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMsg = document.getElementById('phone-error');
+
+        function getUTM() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                source: params.get('utm_source') || '',
+                medium: params.get('utm_medium') || '',
+                campaign: params.get('utm_campaign') || '',
+                content: params.get('utm_content') || '',
+                term: params.get('utm_term') || ''
+            };
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            errorMsg.classList.add('hidden');
+            if (!iti.isValidNumber()) {
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'ОБРОБКА...';
+            const formData = {
+                date: new Date().toLocaleString("uk-UA"),
+                name: document.getElementById('name').value,
+                phone: iti.getNumber(),
+                ...getUTM()
+            };
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            }).then(() => {
+                fbq('track', 'Lead');
+                window.location.href = TELEGRAM_BOT_URL;
+            }).catch(err => {
+                console.error('Error:', err);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'СПРОБУВАТИ ЩЕ РАЗ';
+            });
+        });
+    </script>
+</body>
+</html>
