@@ -305,6 +305,14 @@
                 <p class="text-[10px] uppercase tracking-widest">Гортайте приклади</p>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </div>
+
+            <!-- ADDED BUTTON AFTER BLOCK -->
+            <div class="w-full max-w-xs mx-auto mt-10">
+                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -354,6 +362,14 @@
                         </p>
                     </div>
                 </div>
+            </div>
+
+            <!-- ADDED BUTTON AFTER BLOCK -->
+            <div class="w-full max-w-xs mx-auto mt-10">
+                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -410,6 +426,14 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ADDED BUTTON AFTER BLOCK -->
+            <div class="w-full max-w-xs mx-auto mt-10">
+                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -442,6 +466,14 @@
                     <h3 class="font-bold text-white text-xl uppercase">Схема прогрівів</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">Власна схема прогрівів під тебе, яку ти зможеш впровадити вже завтра.</p>
                 </div>
+            </div>
+
+            <!-- ADDED BUTTON AFTER BLOCK -->
+            <div class="w-full max-w-xs mx-auto mt-10">
+                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -487,6 +519,14 @@
                         </div>
                     </li>
                 </ul>
+            </div>
+
+            <!-- ADDED BUTTON AFTER BLOCK -->
+            <div class="w-full max-w-xs mx-auto mt-10">
+                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -586,6 +626,14 @@
                 <p class="text-[10px] uppercase tracking-widest">Гортайте та натисніть для перегляду</p>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </div>
+
+            <!-- ADDED BUTTON AFTER BLOCK -->
+            <div class="w-full max-w-xs mx-auto mt-10">
+                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -620,8 +668,8 @@
         </div>
     </section>
 
-    <!-- FLOATING CTA -->
-    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6 cta-hidden">
+    <!-- FLOATING CTA (FIXED: ALWAYS VISIBLE 'cta-visible' by default) -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6 cta-visible">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
                 <span>Хочу розбір прогрівів</span>
@@ -727,24 +775,9 @@
             setTimeout(centerPosition, 100);
         }
 
-        // STICKY CTA LOGIC
+        // STICKY CTA LOGIC - DISABLED HIDE LOGIC SO IT IS PINNED FROM START
         function initStickyObserver() {
-            const hero = document.getElementById('hero-section');
-            const stickyCta = document.getElementById('sticky-cta');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        stickyCta.classList.add('cta-hidden');
-                        stickyCta.classList.remove('cta-visible');
-                    } else {
-                        stickyCta.classList.remove('cta-hidden');
-                        stickyCta.classList.add('cta-visible');
-                    }
-                });
-            }, { threshold: 0.1 }); 
-
-            if(hero) observer.observe(hero);
+            // Logic removed so button is always visible
         }
 
         window.onload = function () {
