@@ -175,7 +175,7 @@
         </div>
 
         <!-- Контейнер контенту -->
-        <!-- FIX: pt-[28vh] - трохи підняли, щоб влізло все, але не перекрило обличчя -->
+        <!-- FIX: pt-[28vh] - Оптимально для мобільного, щоб не закривати обличчя -->
         <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center pt-[28vh] md:pt-0">
             
             <!-- Бейдж -->
@@ -184,13 +184,12 @@
             </div>
 
             <!-- Головний Оффер -->
-            <!-- FIX: text-xl на мобільному - більш компактний заголовок -->
+            <!-- FIX: text-xl на мобільному для компактності -->
             <h1 class="text-xl xs:text-2xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-2 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
 
             <!-- Підзаголовок -->
-            <!-- FIX: Зменшено відступи -->
             <p class="text-gray-200 font-bold text-xs md:text-lg leading-relaxed mb-3 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
                 Отримай персональну діагностику, на якій я детально розберу твої прогріви.
             </p>
@@ -211,7 +210,7 @@
                 </div>
             </div>
 
-            <!-- Кнопка -->
+            <!-- Кнопка (Прихована на моб) -->
             <div class="w-full max-w-xs mx-auto hidden md:block mt-4">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
@@ -649,24 +648,26 @@
     <script>
         lucide.createIcons();
 
-        // КОНФІГУРАЦІЯ
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
+        // --- ВАШЕ ПОСИЛАННЯ НА ГУГЛ СКРИПТ ---
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5Gz2aD1fuz0T4fACh7w3YhJdqRvrysxeLRKJB2rRGzFT9QEQa_sA3dNCS29ccv_ObVg/exec'; // ВСТАВТЕ СЮДИ ПОСИЛАННЯ
+        
         // WayForPay налаштування
-        const WFP_MERCHANT_ACCOUNT = 'YOUR_MERCHANT_LOGIN'; 
-        const WFP_MERCHANT_DOMAIN = 'YOUR_WEBSITE.COM'; 
+        const WFP_MERCHANT_ACCOUNT = 'ab7c357790faf1753f7f0b1e56593fd7'; 
+        const WFP_MERCHANT_DOMAIN = 'prohrivvladyslava.vercel.app'; 
 
         // --- A/B TESTING LOGIC (PRICE CONTROL) ---
         const PRICING = {
-            '882': { current: 290, old: 1290 }, // Low price
-            'default': { current: 390, old: 1790 }, // Normal price
-            '551': { current: 590, old: 2190 } // High price
+            '882': { current: 290, old: 1290 }, 
+            'default': { current: 390, old: 1790 }, 
+            '551': { current: 590, old: 2190 },
+            'test': { current: 1, old: 100 } // ТЕСТОВИЙ РЕЖИМ 1 ГРН
         };
 
         let currentPriceObj = PRICING['default'];
 
         function initPrice() {
             const urlParams = new URLSearchParams(window.location.search);
-            const uid = urlParams.get('uid'); // Get code from URL
+            const uid = urlParams.get('uid'); 
 
             if (uid && PRICING[uid]) {
                 currentPriceObj = PRICING[uid];
@@ -699,7 +700,7 @@
             }, 1000);
         }
 
-        // IMPROVED INFINITE SCROLL LOGIC
+        // INFINITE SCROLL LOGIC
         function setupInfiniteScroll(id) {
             const container = document.getElementById(id);
             if (!container) return;
@@ -723,30 +724,28 @@
             setTimeout(centerPosition, 100);
         }
 
-        // STICKY CTA LOGIC - FIXED TO TRIGGER IMMEDIATELY
+        // STICKY CTA LOGIC
         function initStickyObserver() {
-            const header = document.getElementById('main-header'); // Target the header
+            const header = document.getElementById('main-header'); 
             const stickyCta = document.getElementById('sticky-cta');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Header visible (top of page) -> HIDE sticky
                         stickyCta.classList.add('cta-hidden');
                         stickyCta.classList.remove('cta-visible');
                     } else {
-                        // Header NOT visible (scrolled down) -> SHOW sticky
                         stickyCta.classList.remove('cta-hidden');
                         stickyCta.classList.add('cta-visible');
                     }
                 });
-            }, { threshold: 0 }); // Threshold 0 means "trigger as soon as 1 pixel leaves"
+            }, { threshold: 0 }); 
 
             if(header) observer.observe(header);
         }
 
         window.onload = function () {
-            initPrice(); // Set price on load
+            initPrice(); 
             const tenMinutes = 60 * 10;
             const displays = [document.querySelector('#hero-timer')];
             startTimer(tenMinutes, displays);
@@ -809,19 +808,16 @@
         }
 
         // Функція виклику WayForPay
-// Функція виклику WayForPay
         function pay(orderData) {
-            // Беремо ціну з глобальної змінної
             const safeAmount = String(currentPriceObj.current);
-
-            // SAVE DATA TO LOCALSTORAGE FOR SUCCESS/FAIL PAGES
             const urlParams = new URLSearchParams(window.location.search);
             const currentUid = urlParams.get('uid') || 'default';
+            
+            // SAVE STATE FOR REDIRECTS
             localStorage.setItem('wfp_uid', currentUid);
             localStorage.setItem('wfp_amount', safeAmount);
 
-            // Define Return URLs (Absolute paths needed)
-            // Replace 'https://prohrivvladyslava.vercel.app' with your actual domain if different
+            // Redirect URLs
             const DOMAIN = 'https://prohrivvladyslava.vercel.app'; 
             const successUrl = DOMAIN + '/success.html';
             const failUrl = DOMAIN + '/failed.html';
@@ -842,13 +838,11 @@
                 clientFirstName : orderData.name,
                 clientPhone: orderData.phone,
                 language: "UA",
-                // REDIRECT URLS
-                returnUrl: successUrl, // Where to go on success
-                serviceUrl: GOOGLE_SCRIPT_URL // (Optional) Server-to-server callback, but we use client-side update for simplicity in Step 1
+                returnUrl: successUrl, // Redirect on success
+                serviceUrl: GOOGLE_SCRIPT_URL // Server callback (optional)
             },
             function (response) {
                 // on approved (Widget callback)
-                // Sometimes widget doesn't redirect automatically, so we force it
                 window.location.href = successUrl + "?orderReference=" + orderData.orderId;
             },
             function (response) {
@@ -888,37 +882,33 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'ОБРОБКА...';
 
-            // 1. ГЕНЕРУЄМО УНІКАЛЬНИЙ ID
             const uniqueOrderId = generateOrderId();
             
             const formData = {
-                target_sheet: "Прогрів Діагностика", // НОВЕ ПОЛЕ ДЛЯ ТАБЛИЦІ
+                target_sheet: "Прогрів Діагностика", 
                 date: new Date().toLocaleString("uk-UA"),
                 orderId: uniqueOrderId, 
                 name: document.getElementById('name').value,
                 phone: iti.getNumber(),
-                amount: currentPriceObj.current, // Сума для стовпчика "Сума"
-                variant_name: `Price Test: ${currentPriceObj.current} UAH`, // ОКРЕМЕ ПОЛЕ ВАРІАНТУ ДЛЯ ТАБЛИЦІ
+                amount: currentPriceObj.current, 
+                variant_name: `Price Test: ${currentPriceObj.current} UAH`, 
                 status: "Pending Payment", 
                 ...getUTM()
             };
 
-            // 2. ВІДПРАВЛЯЄМО ДАНІ В GOOGLE SHEETS
+            // Send to Google Sheets first
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             }).then(() => {
-                // 3. ПІСЛЯ ЗАПИСУ - ВІДКРИВАЄМО ОПЛАТУ
                 fbq('track', 'Lead');
-                
                 pay({
                     orderId: uniqueOrderId,
                     name: formData.name,
                     phone: formData.phone
                 });
-
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'ПЕРЕЙТИ ДО ОПЛАТИ';
             }).catch(err => {
