@@ -19,6 +19,9 @@
 
     <!-- WayForPay Widget Script -->
     <script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+    
+    <!-- Crypto JS (ДЛЯ ГЕНЕРАЦІЇ ПІДПИСУ) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
     <!-- Meta Pixel Code -->
     <script>
@@ -31,7 +34,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // ЗАМІНІТЬ YOUR_PIXEL_ID НА ВАШ РЕАЛЬНИЙ PIXEL ID
+    // ЗАМІНІТЬ НА ВАШ РЕАЛЬНИЙ PIXEL ID
     fbq('init', 'YOUR_PIXEL_ID'); 
     fbq('track', 'PageView');
     </script>
@@ -175,7 +178,6 @@
         </div>
 
         <!-- Контейнер контенту -->
-        <!-- FIX: pt-[28vh] - Оптимально для мобільного, щоб не закривати обличчя -->
         <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center pt-[28vh] md:pt-0">
             
             <!-- Бейдж -->
@@ -184,7 +186,6 @@
             </div>
 
             <!-- Головний Оффер -->
-            <!-- FIX: text-xl на мобільному для компактності -->
             <h1 class="text-xl xs:text-2xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-2 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
@@ -204,13 +205,12 @@
                     <div class="font-mono font-bold text-white text-sm" id="hero-timer">10:00</div>
                 </div>
                 <div class="flex items-end justify-between">
-                    <!-- Ціна підміняється JS -->
                     <div id="ui-price-main" class="text-3xl font-black text-white">390 ₴</div>
                     <div id="ui-price-old" class="text-xs text-gray-400 line-through decoration-brand-red decoration-2 font-bold mb-1">1790 ₴</div>
                 </div>
             </div>
 
-            <!-- Кнопка (Прихована на моб) -->
+            <!-- Кнопка -->
             <div class="w-full max-w-xs mx-auto hidden md:block mt-4">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
@@ -648,11 +648,15 @@
     <script>
         lucide.createIcons();
 
-        // --- ВАШЕ ПОСИЛАННЯ НА ГУГЛ СКРИПТ ---
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5Gz2aD1fuz0T4fACh7w3YhJdqRvrysxeLRKJB2rRGzFT9QEQa_sA3dNCS29ccv_ObVg/exec'; // ВСТАВТЕ СЮДИ ПОСИЛАННЯ
+        // --- ВАШЕ ПОСИЛАННЯ НА ГУГЛ СКРИПТ (НЕ ЗАБУДЬТЕ ВСТАВИТИ!) ---
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
         
         // WayForPay налаштування
-        const WFP_MERCHANT_ACCOUNT = 'freelance_user_674ece748edc5'; 
+        // Secret Key (Використовується ДЛЯ ПІДПИСУ)
+        const WFP_SECRET_KEY = 'd9813f561284abe48c68b778f8fc4e72b8b3740e'; 
+        // Merchant Account (Login)
+        const WFP_MERCHANT_ACCOUNT = 'ab7c357790faf1753f7f0b1e56593fd7'; 
+        
         const WFP_MERCHANT_DOMAIN = 'prohrivvladyslava.vercel.app'; 
 
         // --- A/B TESTING LOGIC (PRICE CONTROL) ---
@@ -813,44 +817,62 @@
             const urlParams = new URLSearchParams(window.location.search);
             const currentUid = urlParams.get('uid') || 'default';
             
-            // SAVE STATE FOR REDIRECTS
+            // SAVE STATE
             localStorage.setItem('wfp_uid', currentUid);
             localStorage.setItem('wfp_amount', safeAmount);
 
-            // Redirect URLs
             const DOMAIN = 'https://prohrivvladyslava.vercel.app'; 
             const successUrl = DOMAIN + '/success.html';
             const failUrl = DOMAIN + '/failed.html';
+            
+            // DATA PREPARATION FOR SIGNATURE
+            const orderDate = Math.floor(Date.now() / 1000);
+            const productName = "Персональна Діагностика";
+            const productCount = "1";
+            
+            // СТВОРЕННЯ РЯДКА ДЛЯ ПІДПИСУ (HMAC MD5)
+            // Порядок: merchantAccount;merchantDomainName;orderReference;orderDate;amount;currency;productName;productCount;productPrice
+            const stringToSign = [
+                WFP_MERCHANT_ACCOUNT,
+                WFP_MERCHANT_DOMAIN,
+                orderData.orderId,
+                orderDate,
+                safeAmount,
+                "UAH",
+                productName,
+                productCount,
+                safeAmount
+            ].join(";");
+
+            // Генерація підпису
+            const signature = CryptoJS.HmacMD5(stringToSign, WFP_SECRET_KEY).toString();
 
             var wayforpay = new Wayforpay();
             wayforpay.run({
                 merchantAccount : WFP_MERCHANT_ACCOUNT,
                 merchantDomainName : WFP_MERCHANT_DOMAIN,
                 authorizationType : "SimpleSignature",
-                merchantSignature : "", 
+                merchantSignature : signature, // <-- ПЕРЕДАЄМО ПІДПИС
                 orderReference : orderData.orderId, 
-                orderDate :  Math.floor(Date.now() / 1000),
+                orderDate : orderDate,
                 amount : safeAmount, 
                 currency : "UAH",
-                productName : ["Персональна Діагностика"],
+                productName : [productName],
                 productPrice : [safeAmount], 
-                productCount : ["1"],
+                productCount : [productCount],
                 clientFirstName : orderData.name,
                 clientPhone: orderData.phone,
                 language: "UA",
-                returnUrl: successUrl, // Redirect on success
-                serviceUrl: GOOGLE_SCRIPT_URL // Server callback (optional)
+                returnUrl: successUrl,
+                serviceUrl: GOOGLE_SCRIPT_URL
             },
             function (response) {
-                // on approved (Widget callback)
                 window.location.href = successUrl + "?orderReference=" + orderData.orderId;
             },
             function (response) {
-                // on declined
                 window.location.href = failUrl;
             },
             function (response) {
-                // on pending or other error
                 console.log("Payment pending/error");
             });
         }
