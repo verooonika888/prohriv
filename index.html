@@ -133,24 +133,19 @@
 <body class="antialiased overflow-x-hidden pb-24">
 
     <!-- HERO SECTION -->
-    <section class="relative min-h-[100dvh] flex flex-col justify-end pb-8 overflow-hidden bg-brand-bg">
+    <section class="relative min-h-[100dvh] flex flex-col justify-end pb-8 bg-brand-bg">
         
-        <!-- Фонове зображення -->
-        <div class="absolute inset-0 z-0 overflow-hidden">
-            <!-- 
-               object-top: притискає фото до верху (голову не обрізає).
-               Прибрано scale і translate, щоб фото було природнім і не вилазило за межі.
-            -->
+        <!-- Фонове зображення: Займає лише верхні 60% екрану, щоб не перекривати текст -->
+        <div class="absolute top-0 left-0 right-0 h-[60vh] z-0 overflow-hidden">
             <img src="IMG_1520.JPG" 
                  alt="Vlada Tsarenko" 
                  class="w-full h-full object-cover object-top">
-            
-            <!-- Градієнт -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/90 to-transparent z-10"></div>
+            <!-- Градієнт: плавний перехід в чорний колір знизу фото -->
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-brand-bg to-transparent"></div>
         </div>
 
-        <!-- Контейнер контенту -->
-        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center">
+        <!-- Контейнер контенту: Центрований, внизу екрану -->
+        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center mt-[45vh]">
             
             <!-- Бейдж -->
             <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow animate-pulse">
@@ -551,37 +546,6 @@
                 <i data-lucide="chevron-left" class="w-4 h-4"></i>
                 <p class="text-[10px] uppercase tracking-widest">Гортайте та натисніть для перегляду</p>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </div>
-        </div>
-    </section>
-
-    <!-- GUARANTEE SECTION -->
-    <section class="py-20 px-4 bg-[#222222] text-center pb-32">
-        <div class="max-w-md mx-auto">
-            <div class="bg-brand-asphalt border-2 border-brand-gold/20 rounded-2xl p-8 shadow-gold-glow relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-8 opacity-5">
-                    <i data-lucide="shield-check" class="w-48 h-48 text-brand-gold"></i>
-                </div>
-                
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="bg-brand-gold/10 p-4 rounded-full mb-6 text-brand-gold border border-brand-gold/30">
-                        <i data-lucide="shield-check" class="w-12 h-12"></i>
-                    </div>
-
-                    <h3 class="text-2xl font-black text-white mb-4 uppercase leading-none">
-                        100% ГАРАНТІЯ <br>
-                        <span class="text-brand-gold">ПОВЕРНЕННЯ</span>
-                    </h3>
-                    
-                    <p class="text-gray-300 text-sm mb-8 font-medium leading-relaxed">
-                        Якщо персональна стратегія не принесе користі — я поверну вам усі 390 грн.
-                    </p>
-
-                    <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                        <span>Хочу розбір прогрівів</span>
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </section>
