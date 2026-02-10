@@ -17,6 +17,9 @@
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- WayForPay Widget Script -->
+    <script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -128,25 +131,56 @@
         .text-shadow-strong {
             text-shadow: 0 4px 10px rgba(0,0,0,0.9);
         }
+
+        /* Анімація для нижньої кнопки */
+        #sticky-cta {
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .cta-hidden {
+            transform: translateY(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .cta-visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
+    <!-- HEADER (BUFFER) -->
+    <header class="absolute top-0 left-0 w-full z-40 px-4 py-6">
+        <div class="container mx-auto max-w-5xl flex justify-between items-center">
+            <!-- Logo / Name -->
+            <div class="font-black text-xl md:text-2xl uppercase tracking-tighter text-white drop-shadow-md">
+                Влада <span class="text-brand-red">Царенко</span>
+            </div>
+            <!-- Header Button -->
+            <button onclick="openModal()" class="bg-brand-red hover:bg-brand-darkred text-white text-xs md:text-sm font-extrabold py-3 px-5 rounded-lg shadow-glow transition-all uppercase tracking-wide border border-white/10">
+                Замовити розбір
+            </button>
+        </div>
+    </header>
+
     <!-- HERO SECTION -->
-    <section class="relative min-h-[100dvh] flex flex-col justify-end pb-8 overflow-hidden bg-brand-bg">
+    <!-- Added id="hero-section" for observer logic -->
+    <section id="hero-section" class="relative min-h-[100dvh] flex flex-col justify-end pb-8 overflow-hidden bg-brand-bg pt-24">
         
         <!-- Фонове зображення -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <!-- 
-               object-top: притискає фото до верху (голову не обрізає).
-               Прибрано scale і translate, щоб фото було природнім і не вилазило за межі.
+               object-top: притискає фото до верху.
             -->
             <img src="IMG_1520.JPG" 
                  alt="Vlada Tsarenko" 
                  class="w-full h-full object-cover object-top">
             
             <!-- Градієнт -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/90 to-transparent z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/80 to-transparent z-10"></div>
+            <!-- Додатковий градієнт зверху щоб хедер читався -->
+            <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#1C1C1C]/80 to-transparent z-10"></div>
         </div>
 
         <!-- Контейнер контенту -->
@@ -182,12 +216,17 @@
                 </div>
             </div>
 
-            <!-- Кнопка -->
-            <div class="w-full max-w-xs mx-auto">
+            <!-- Кнопка (Прихована на мобільному, бо є в хедері та sticky, показана на десктопі) -->
+            <div class="w-full max-w-xs mx-auto hidden md:block">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </button>
+            </div>
+            
+            <!-- Мобільна стрілка вниз -->
+            <div class="mt-4 md:hidden text-white/50 animate-bounce">
+                <i data-lucide="chevron-down" class="w-6 h-6"></i>
             </div>
         </div>
     </section>
@@ -586,8 +625,8 @@
         </div>
     </section>
 
-    <!-- FLOATING CTA -->
-    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6">
+    <!-- FLOATING CTA (Added cta-hidden class) -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6 cta-hidden">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
                 <span>Хочу розбір прогрівів</span>
@@ -610,19 +649,19 @@
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
                 <h3 class="text-2xl font-black text-white text-center mb-2 uppercase">Останній крок</h3>
-                <p class="text-gray-400 text-center text-xs mb-6 font-medium">Залиште дані для зв'язку в Telegram</p>
+                <p class="text-gray-400 text-center text-xs mb-6 font-medium">Залиште дані для оплати та зв'язку</p>
                 <form id="leadForm" class="space-y-4">
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Ваше Ім'я</label>
                         <input type="text" id="name" name="name" required placeholder="Введіть ім'я" class="w-full h-14 px-4 font-bold placeholder-gray-600">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Телефон (Telegram)</label>
+                        <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Телефон</label>
                         <input type="tel" id="phone" name="phone" required class="w-full h-14 px-4 font-bold">
                         <p id="phone-error" class="text-brand-red text-xs mt-1 hidden font-bold">Перевірте правильність номеру</p>
                     </div>
                     <button type="submit" id="submitBtn" class="w-full bg-brand-red hover:bg-red-800 text-white font-extrabold text-lg py-4 rounded-lg transition-all mt-4 uppercase tracking-widest shadow-lg">
-                        Отримати доступ
+                        Перейти до оплати
                     </button>
                 </form>
             </div>
@@ -648,8 +687,11 @@
     <script>
         lucide.createIcons();
 
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
-        const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK_HERE'; 
+        // КОНФІГУРАЦІЯ
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // Вставте лінк на ваш веб-додаток Google
+        // WayForPay налаштування
+        const WFP_MERCHANT_ACCOUNT = 'YOUR_MERCHANT_LOGIN'; // ВАШ ЛОГІН МЕРЧАНТА (наприклад 'test_merch_n1')
+        const WFP_MERCHANT_DOMAIN = 'YOUR_WEBSITE.COM'; // ВАШ ДОМЕН (наприклад 'mysite.com')
 
         // TIMER
         function startTimer(duration, displays) {
@@ -666,52 +708,59 @@
             }, 1000);
         }
 
-        // IMPROVED INFINITE SCROLL LOGIC (NO JAMMING)
+        // IMPROVED INFINITE SCROLL LOGIC
         function setupInfiniteScroll(id) {
             const container = document.getElementById(id);
             if (!container) return;
-            
-            // Дублюємо контент 3 рази для створення буферної зони
-            // Лівий буфер | Центральна зона (де користувач) | Правий буфер
             const content = container.innerHTML;
             container.innerHTML = content + content + content;
             
-            // Центруємо користувача після завантаження
             const centerPosition = () => {
                 container.scrollLeft = container.scrollWidth / 3;
             };
 
-            // Функція обробки скролу
             const handleScroll = () => {
                 const totalWidth = container.scrollWidth;
                 const oneThird = totalWidth / 3;
-                
-                // Якщо користувач доскролив до кінця другої третини (початок правого буфера)
                 if (container.scrollLeft >= oneThird * 2) { 
-                    // Непомітно перекидаємо назад на одну третину
                     container.scrollLeft -= oneThird;
-                } 
-                // Якщо користувач доскролив до початку першої третини (кінець лівого буфера)
-                else if (container.scrollLeft <= 50) { 
-                    // Непомітно перекидаємо вперед на одну третину
+                } else if (container.scrollLeft <= 50) { 
                     container.scrollLeft += oneThird;
                 }
             };
-
             container.addEventListener('scroll', handleScroll);
-            
-            // Встановлюємо початкову позицію
             setTimeout(centerPosition, 100);
+        }
+
+        // STICKY CTA LOGIC
+        function initStickyObserver() {
+            const hero = document.getElementById('hero-section');
+            const stickyCta = document.getElementById('sticky-cta');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Hero is visible -> Hide sticky CTA
+                        stickyCta.classList.add('cta-hidden');
+                        stickyCta.classList.remove('cta-visible');
+                    } else {
+                        // Hero is NOT visible -> Show sticky CTA
+                        stickyCta.classList.remove('cta-hidden');
+                        stickyCta.classList.add('cta-visible');
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of hero is visible
+
+            if(hero) observer.observe(hero);
         }
 
         window.onload = function () {
             const tenMinutes = 60 * 10;
             const displays = [document.querySelector('#hero-timer')];
             startTimer(tenMinutes, displays);
-            
-            // Ініціалізація нескінченної прокрутки для обох блоків
             setupInfiniteScroll('storytelling-container');
             setupInfiniteScroll('reviews-container');
+            initStickyObserver(); // Start observer
         };
 
         // PHONE INPUT
@@ -760,7 +809,48 @@
             container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
         }
 
-        // SUBMISSION
+        // --- PAYMENT LOGIC START ---
+
+        // Функція для генерації унікального ID замовлення (API logic simulation)
+        function generateOrderId() {
+            // Формат: ORDER_Час_ВипадковеЧисло
+            return 'ORDER_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+        }
+
+        // Функція виклику WayForPay
+        function pay(orderData) {
+            var wayforpay = new Wayforpay();
+            wayforpay.run({
+                merchantAccount : WFP_MERCHANT_ACCOUNT,
+                merchantDomainName : WFP_MERCHANT_DOMAIN,
+                authorizationType : "SimpleSignature",
+                merchantSignature : "", // Залиште пустим для авто-генерації на стороні WFP або обчисліть на сервері якщо треба
+                orderReference : orderData.orderId, // Цей самий ID йде в таблицю
+                orderDate :  Math.floor(Date.now() / 1000),
+                amount : "390",
+                currency : "UAH",
+                productName : ["Персональна Діагностика"],
+                productPrice : ["390"],
+                productCount : ["1"],
+                clientFirstName : orderData.name,
+                clientPhone: orderData.phone,
+                language: "UA"
+            },
+            function (response) {
+                // on approved
+                fbq('track', 'Purchase', {value: 390, currency: 'UAH'});
+                window.location.href = "YOUR_THANK_YOU_PAGE_URL"; // Або посилання на бота
+            },
+            function (response) {
+                // on declined
+                console.log("Payment declined");
+            },
+            function (response) {
+                // on pending or other error
+                console.log("Payment pending/error");
+            });
+        }
+
         const form = document.getElementById('leadForm');
         const submitBtn = document.getElementById('submitBtn');
         const errorMsg = document.getElementById('phone-error');
@@ -779,26 +869,45 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             errorMsg.classList.add('hidden');
+            
             if (!iti.isValidNumber()) {
                 errorMsg.classList.remove('hidden');
                 return;
             }
+
             submitBtn.disabled = true;
             submitBtn.textContent = 'ОБРОБКА...';
+
+            // 1. ГЕНЕРУЄМО УНІКАЛЬНИЙ ID (Щоб не було дублів)
+            const uniqueOrderId = generateOrderId();
+            
             const formData = {
                 date: new Date().toLocaleString("uk-UA"),
+                orderId: uniqueOrderId, // Додаємо ID в дані для таблиці
                 name: document.getElementById('name').value,
                 phone: iti.getNumber(),
+                status: "Pending Payment", // Помічаємо як очікує оплати
                 ...getUTM()
             };
+
+            // 2. ВІДПРАВЛЯЄМО ДАНІ В GOOGLE SHEETS (Разом з ID)
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             }).then(() => {
-                fbq('track', 'Lead');
-                window.location.href = TELEGRAM_BOT_URL;
+                // 3. ПІСЛЯ ЗАПИСУ В ТАБЛИЦЮ - ВІДКРИВАЄМО ОПЛАТУ З ТИМ ЖЕ ID
+                fbq('track', 'Lead'); // Трекаємо лід перед оплатою
+                
+                pay({
+                    orderId: uniqueOrderId,
+                    name: formData.name,
+                    phone: formData.phone
+                });
+
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'ПЕРЕЙТИ ДО ОПЛАТИ';
             }).catch(err => {
                 console.error('Error:', err);
                 submitBtn.disabled = false;
