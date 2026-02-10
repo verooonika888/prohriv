@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помилка оплати | Влада Царенко</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #1C1C1C; color: #ffffff; font-family: sans-serif; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen text-center px-4">
+
+    <div class="max-w-md w-full bg-[#262626] border border-[#404040] rounded-2xl p-8 shadow-2xl">
+        <div class="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </div>
+        
+        <h1 class="text-2xl font-black uppercase mb-4 text-white">Оплата не пройшла</h1>
+        <p class="text-gray-400 mb-8">Можливо, недостатньо коштів або помилка на стороні банку.</p>
+        
+        <button onclick="retryPayment()" class="w-full bg-[#E63946] hover:bg-[#9B2226] text-white font-extrabold text-lg py-4 rounded-lg shadow-lg transition-all uppercase tracking-wide">
+            Спробувати ще раз
+        </button>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        function retryPayment() {
+            // Get params that WFP might have sent back or retrieve from localStorage
+            const savedUid = localStorage.getItem('wfp_uid'); // The price variant code (882, 551 etc)
+            
+            let redirectUrl = '/index.html'; // Or just '/'
+            if(savedUid) {
+                redirectUrl += '?uid=' + savedUid;
+            }
+            // We redirect back to main page. 
+            // Ideally we could pass '?retry=true' to auto-open modal, but simple redirect is fine.
+            window.location.href = redirectUrl;
+        }
+    </script>
+</body>
+</html>
