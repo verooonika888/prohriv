@@ -145,7 +145,7 @@
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
-    <!-- HEADER (BUFFER) - ADDED ID="main-header" -->
+    <!-- HEADER (BUFFER) -->
     <header id="main-header" class="absolute top-0 left-0 w-full z-40 px-4 py-6">
         <div class="container mx-auto max-w-5xl flex justify-between items-center">
             <!-- Logo / Name -->
@@ -175,7 +175,8 @@
         </div>
 
         <!-- Контейнер контенту -->
-        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center pt-[35vh] md:pt-0">
+        <!-- FIX: pt-[28vh] - трохи підняли, щоб влізло все, але не перекрило обличчя -->
+        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center pt-[28vh] md:pt-0">
             
             <!-- Бейдж -->
             <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-2 rounded-sm shadow-glow animate-pulse">
@@ -183,12 +184,14 @@
             </div>
 
             <!-- Головний Оффер -->
-            <h1 class="text-2xl xs:text-3xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-3 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
+            <!-- FIX: text-xl на мобільному - більш компактний заголовок -->
+            <h1 class="text-xl xs:text-2xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-2 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
 
             <!-- Підзаголовок -->
-            <p class="text-gray-200 font-bold text-xs md:text-lg leading-relaxed mb-4 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
+            <!-- FIX: Зменшено відступи -->
+            <p class="text-gray-200 font-bold text-xs md:text-lg leading-relaxed mb-3 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
                 Отримай персональну діагностику, на якій я детально розберу твої прогріви.
             </p>
 
@@ -217,7 +220,7 @@
             </div>
             
             <!-- Мобільна стрілка вниз -->
-            <div class="mt-2 md:hidden text-white/50 animate-bounce">
+            <div class="mt-1 md:hidden text-white/50 animate-bounce">
                 <i data-lucide="chevron-down" class="w-5 h-5"></i>
             </div>
         </div>
@@ -874,6 +877,7 @@
             const uniqueOrderId = generateOrderId();
             
             const formData = {
+                target_sheet: "Прогрів Діагностика", // НОВЕ ПОЛЕ ДЛЯ ТАБЛИЦІ
                 date: new Date().toLocaleString("uk-UA"),
                 orderId: uniqueOrderId, 
                 name: document.getElementById('name').value,
