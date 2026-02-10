@@ -21,7 +21,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // REPLACE WITH YOUR PIXEL ID
+    // ЗАМІНІТЬ YOUR_PIXEL_ID НА ВАШ
     fbq('init', 'YOUR_PIXEL_ID'); 
     fbq('track', 'PageView');
     </script>
@@ -37,33 +37,40 @@
             <i data-lucide="check" class="w-10 h-10"></i>
         </div>
         
-        <h1 class="text-2xl font-black uppercase mb-4 text-white">Оплата успішна!</h1>
-        <p class="text-gray-400 mb-8">Дякуємо за довіру. Зараз ми перенаправимо вас до бота.</p>
+        <h1 class="text-2xl font-black uppercase mb-4 text-white">Дякуємо за покупку!</h1>
         
-        <div id="loading" class="text-sm text-gray-500 animate-pulse">Оновлюємо статус замовлення...</div>
+        <div class="space-y-4 text-gray-300 text-lg leading-relaxed">
+            <p>Ваша оплата пройшла успішно.</p>
+            <p class="font-bold text-white border-t border-b border-white/10 py-4">
+                Ми зв'яжемося з вами найближчим часом для узгодження дати та часу проведення діагностики.
+            </p>
+            <p class="text-sm text-gray-500">
+                Перевірте, чи вказали ви правильний номер телефону/Telegram при оформленні.
+            </p>
+        </div>
+
+        <!-- Кнопка повернення на головну (за бажанням, можна прибрати) -->
+        <a href="/" class="inline-block mt-8 text-sm text-[#E63946] hover:text-white transition-colors underline decoration-2 underline-offset-4">
+            Повернутися на головну
+        </a>
     </div>
 
     <script>
         lucide.createIcons();
         
-        // CONFIG
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // The same script URL
-        const TELEGRAM_BOT_URL = 'YOUR_BOT_LINK_HERE'; // Link to your bot/channel
+        // ВСТАВТЕ ТУТ ВАШЕ ПОСИЛАННЯ НА ГУГЛ СКРИПТ (Те саме, що і в index.html)
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
 
         window.onload = function() {
-            // Get params from URL (WayForPay redirects here with params)
             const urlParams = new URLSearchParams(window.location.search);
-            const orderReference = urlParams.get('orderReference'); // Our unique Order ID
+            const orderReference = urlParams.get('orderReference');
             
-            // We can try to get the real amount from params if WFP sends it, 
-            // but tracking Purchase event usually needs value.
-            // Let's grab amount from localStorage if we saved it before payment
+            // Трекінг покупки
             const savedAmount = localStorage.getItem('wfp_amount') || '390';
-            
             fbq('track', 'Purchase', {value: savedAmount, currency: 'UAH'});
 
-            if(orderReference) {
-                // Send update request to Google Sheets
+            // Оновлення статусу в таблиці (фоном)
+            if(orderReference && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -74,15 +81,10 @@
                         status: "PAID_SUCCESS"
                     })
                 }).then(() => {
-                    setTimeout(() => { window.location.href = TELEGRAM_BOT_URL; }, 1500);
+                    console.log("Status updated to PAID");
                 }).catch(err => {
-                    console.error(err);
-                    // Redirect anyway even if script fails
-                    setTimeout(() => { window.location.href = TELEGRAM_BOT_URL; }, 2000);
+                    console.error("Error updating status:", err);
                 });
-            } else {
-                // If no orderReference, just redirect
-                setTimeout(() => { window.location.href = TELEGRAM_BOT_URL; }, 2000);
             }
         };
     </script>
