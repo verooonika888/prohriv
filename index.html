@@ -31,7 +31,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // ЗАМІНІТЬ YOUR_PIXEL_ID
+    // ЗАМІНІТЬ YOUR_PIXEL_ID НА ВАШ РЕАЛЬНИЙ PIXEL ID
     fbq('init', 'YOUR_PIXEL_ID'); 
     fbq('track', 'PageView');
     </script>
@@ -94,11 +94,6 @@
         }
         .iti__selected-flag { background-color: #2A2A2A !important; }
         
-        /* ГРАДІЄНТ: Темніше зліва, прозоро справа */
-        .hero-gradient {
-            background: linear-gradient(90deg, #1C1C1C 15%, rgba(28,28,28,0.95) 45%, transparent 70%);
-        }
-
         /* Glassmorphism */
         .glass-card {
             background: rgba(40, 40, 40, 0.85);
@@ -165,59 +160,59 @@
     </header>
 
     <!-- HERO SECTION -->
-    <!-- Added id="hero-section" for observer logic -->
-    <section id="hero-section" class="relative min-h-[100dvh] flex flex-col justify-end pb-8 overflow-hidden bg-brand-bg pt-24">
+    <section id="hero-section" class="relative min-h-[100dvh] flex flex-col justify-end pb-4 overflow-hidden bg-brand-bg">
         
         <!-- Фонове зображення -->
         <div class="absolute inset-0 z-0 overflow-hidden">
-            <!-- 
-               object-top: притискає фото до верху.
-            -->
+            <!-- object-top притискає фото до верху (щоб голову не зрізало) -->
             <img src="IMG_1520.JPG" 
                  alt="Vlada Tsarenko" 
                  class="w-full h-full object-cover object-top">
             
-            <!-- Градієнт -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/80 to-transparent z-10"></div>
-            <!-- Додатковий градієнт зверху щоб хедер читався -->
+            <!-- Градієнт знизу (для читабельності тексту) -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/60 to-transparent z-10"></div>
+            <!-- Градієнт зверху (для читабельності хедера) -->
             <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#1C1C1C]/80 to-transparent z-10"></div>
         </div>
 
         <!-- Контейнер контенту -->
-        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center">
+        <!-- pt-[35vh] - ЦЕ ГОЛОВНИЙ ФІКС. 
+             Це резервує верхні 35% екрану порожніми для обличчя.
+             Текст починається тільки нижче цієї лінії. -->
+        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center pt-[35vh] md:pt-0">
             
             <!-- Бейдж -->
-            <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-4 rounded-sm shadow-glow animate-pulse">
+            <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-2 rounded-sm shadow-glow animate-pulse">
                 Персональна діагностика
             </div>
 
-            <!-- Головний Оффер (Жирніший шрифт і тінь) -->
-            <h1 class="text-3xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-4 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
+            <!-- Головний Оффер (Зменшено шрифт на мобільному щоб влізло) -->
+            <h1 class="text-2xl xs:text-3xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-3 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
 
             <!-- Підзаголовок -->
-            <p class="text-gray-200 font-bold text-sm md:text-lg leading-relaxed mb-6 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
-                Отримай персональну діагностику, на якій я детально розберу твої прогріви. Ти отримаєш чіткий покроковий план та всі рекомендації.
+            <p class="text-gray-200 font-bold text-xs md:text-lg leading-relaxed mb-4 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
+                Отримай персональну діагностику, на якій я детально розберу твої прогріви.
             </p>
 
-            <!-- Ціна та Таймер -->
-            <div class="glass-card rounded-xl p-4 shadow-glow w-full mb-4 border border-white/20 relative overflow-hidden max-w-xs mx-auto">
-                <div class="flex items-center justify-between mb-2 border-b border-white/10 pb-2">
+            <!-- Ціна та Таймер (Компактний) -->
+            <div class="glass-card rounded-xl p-3 shadow-glow w-full mb-1 border border-white/20 relative overflow-hidden max-w-[280px] mx-auto">
+                <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
                     <span class="text-[10px] text-brand-red font-bold uppercase tracking-wider flex items-center gap-1">
                         <span class="w-1.5 h-1.5 bg-brand-red rounded-full animate-ping"></span>
                         Збільшення ціни:
                     </span>
-                    <div class="font-mono font-bold text-white text-base" id="hero-timer">10:00</div>
+                    <div class="font-mono font-bold text-white text-sm" id="hero-timer">10:00</div>
                 </div>
                 <div class="flex items-end justify-between">
-                    <div class="text-4xl font-black text-white">390 ₴</div>
-                    <div class="text-sm text-gray-400 line-through decoration-brand-red decoration-2 font-bold mb-1">1790 ₴</div>
+                    <div class="text-3xl font-black text-white">390 ₴</div>
+                    <div class="text-xs text-gray-400 line-through decoration-brand-red decoration-2 font-bold mb-1">1790 ₴</div>
                 </div>
             </div>
 
-            <!-- Кнопка (Прихована на мобільному, бо є в хедері та sticky, показана на десктопі) -->
-            <div class="w-full max-w-xs mx-auto hidden md:block">
+            <!-- Кнопка (Прихована на мобільному, бо є в хедері та знизу) -->
+            <div class="w-full max-w-xs mx-auto hidden md:block mt-4">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
@@ -225,8 +220,8 @@
             </div>
             
             <!-- Мобільна стрілка вниз -->
-            <div class="mt-4 md:hidden text-white/50 animate-bounce">
-                <i data-lucide="chevron-down" class="w-6 h-6"></i>
+            <div class="mt-2 md:hidden text-white/50 animate-bounce">
+                <i data-lucide="chevron-down" class="w-5 h-5"></i>
             </div>
         </div>
     </section>
@@ -625,7 +620,7 @@
         </div>
     </section>
 
-    <!-- FLOATING CTA (Added cta-hidden class) -->
+    <!-- FLOATING CTA -->
     <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6 cta-hidden">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
@@ -688,10 +683,10 @@
         lucide.createIcons();
 
         // КОНФІГУРАЦІЯ
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // Вставте лінк на ваш веб-додаток Google
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; 
         // WayForPay налаштування
-        const WFP_MERCHANT_ACCOUNT = 'YOUR_MERCHANT_LOGIN'; // ВАШ ЛОГІН МЕРЧАНТА (наприклад 'test_merch_n1')
-        const WFP_MERCHANT_DOMAIN = 'YOUR_WEBSITE.COM'; // ВАШ ДОМЕН (наприклад 'mysite.com')
+        const WFP_MERCHANT_ACCOUNT = 'YOUR_MERCHANT_LOGIN'; 
+        const WFP_MERCHANT_DOMAIN = 'YOUR_WEBSITE.COM'; 
 
         // TIMER
         function startTimer(duration, displays) {
@@ -740,16 +735,14 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Hero is visible -> Hide sticky CTA
                         stickyCta.classList.add('cta-hidden');
                         stickyCta.classList.remove('cta-visible');
                     } else {
-                        // Hero is NOT visible -> Show sticky CTA
                         stickyCta.classList.remove('cta-hidden');
                         stickyCta.classList.add('cta-visible');
                     }
                 });
-            }, { threshold: 0.1 }); // Trigger when 10% of hero is visible
+            }, { threshold: 0.1 }); 
 
             if(hero) observer.observe(hero);
         }
@@ -760,7 +753,7 @@
             startTimer(tenMinutes, displays);
             setupInfiniteScroll('storytelling-container');
             setupInfiniteScroll('reviews-container');
-            initStickyObserver(); // Start observer
+            initStickyObserver(); 
         };
 
         // PHONE INPUT
@@ -811,9 +804,8 @@
 
         // --- PAYMENT LOGIC START ---
 
-        // Функція для генерації унікального ID замовлення (API logic simulation)
+        // Функція для генерації унікального ID замовлення
         function generateOrderId() {
-            // Формат: ORDER_Час_ВипадковеЧисло
             return 'ORDER_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
         }
 
@@ -824,8 +816,8 @@
                 merchantAccount : WFP_MERCHANT_ACCOUNT,
                 merchantDomainName : WFP_MERCHANT_DOMAIN,
                 authorizationType : "SimpleSignature",
-                merchantSignature : "", // Залиште пустим для авто-генерації на стороні WFP або обчисліть на сервері якщо треба
-                orderReference : orderData.orderId, // Цей самий ID йде в таблицю
+                merchantSignature : "", 
+                orderReference : orderData.orderId, 
                 orderDate :  Math.floor(Date.now() / 1000),
                 amount : "390",
                 currency : "UAH",
@@ -839,7 +831,7 @@
             function (response) {
                 // on approved
                 fbq('track', 'Purchase', {value: 390, currency: 'UAH'});
-                window.location.href = "YOUR_THANK_YOU_PAGE_URL"; // Або посилання на бота
+                window.location.href = "YOUR_THANK_YOU_PAGE_URL"; 
             },
             function (response) {
                 // on declined
@@ -878,27 +870,27 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'ОБРОБКА...';
 
-            // 1. ГЕНЕРУЄМО УНІКАЛЬНИЙ ID (Щоб не було дублів)
+            // 1. ГЕНЕРУЄМО УНІКАЛЬНИЙ ID
             const uniqueOrderId = generateOrderId();
             
             const formData = {
                 date: new Date().toLocaleString("uk-UA"),
-                orderId: uniqueOrderId, // Додаємо ID в дані для таблиці
+                orderId: uniqueOrderId, 
                 name: document.getElementById('name').value,
                 phone: iti.getNumber(),
-                status: "Pending Payment", // Помічаємо як очікує оплати
+                status: "Pending Payment", 
                 ...getUTM()
             };
 
-            // 2. ВІДПРАВЛЯЄМО ДАНІ В GOOGLE SHEETS (Разом з ID)
+            // 2. ВІДПРАВЛЯЄМО ДАНІ В GOOGLE SHEETS
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             }).then(() => {
-                // 3. ПІСЛЯ ЗАПИСУ В ТАБЛИЦЮ - ВІДКРИВАЄМО ОПЛАТУ З ТИМ ЖЕ ID
-                fbq('track', 'Lead'); // Трекаємо лід перед оплатою
+                // 3. ПІСЛЯ ЗАПИСУ - ВІДКРИВАЄМО ОПЛАТУ
+                fbq('track', 'Lead');
                 
                 pay({
                     orderId: uniqueOrderId,
