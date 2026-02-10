@@ -129,7 +129,7 @@
 
         /* Анімація для нижньої кнопки */
         #sticky-cta {
-            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
         .cta-hidden {
             transform: translateY(100%);
@@ -145,8 +145,8 @@
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
-    <!-- HEADER (BUFFER) -->
-    <header class="absolute top-0 left-0 w-full z-40 px-4 py-6">
+    <!-- HEADER (BUFFER) - ADDED ID="main-header" -->
+    <header id="main-header" class="absolute top-0 left-0 w-full z-40 px-4 py-6">
         <div class="container mx-auto max-w-5xl flex justify-between items-center">
             <!-- Logo / Name -->
             <div class="font-black text-xl md:text-2xl uppercase tracking-tighter text-white drop-shadow-md">
@@ -164,21 +164,17 @@
         
         <!-- Фонове зображення -->
         <div class="absolute inset-0 z-0 overflow-hidden">
-            <!-- object-top притискає фото до верху (щоб голову не зрізало) -->
             <img src="IMG_1520.JPG" 
                  alt="Vlada Tsarenko" 
                  class="w-full h-full object-cover object-top">
             
-            <!-- Градієнт знизу (для читабельності тексту) -->
+            <!-- Градієнт знизу -->
             <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/60 to-transparent z-10"></div>
-            <!-- Градієнт зверху (для читабельності хедера) -->
+            <!-- Градієнт зверху -->
             <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#1C1C1C]/80 to-transparent z-10"></div>
         </div>
 
         <!-- Контейнер контенту -->
-        <!-- pt-[35vh] - ЦЕ ГОЛОВНИЙ ФІКС. 
-             Це резервує верхні 35% екрану порожніми для обличчя.
-             Текст починається тільки нижче цієї лінії. -->
         <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center pt-[35vh] md:pt-0">
             
             <!-- Бейдж -->
@@ -186,7 +182,7 @@
                 Персональна діагностика
             </div>
 
-            <!-- Головний Оффер (Зменшено шрифт на мобільному щоб влізло) -->
+            <!-- Головний Оффер -->
             <h1 class="text-2xl xs:text-3xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-3 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
@@ -196,7 +192,7 @@
                 Отримай персональну діагностику, на якій я детально розберу твої прогріви.
             </p>
 
-            <!-- Ціна та Таймер (Компактний) -->
+            <!-- Ціна та Таймер -->
             <div class="glass-card rounded-xl p-3 shadow-glow w-full mb-1 border border-white/20 relative overflow-hidden max-w-[280px] mx-auto">
                 <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
                     <span class="text-[10px] text-brand-red font-bold uppercase tracking-wider flex items-center gap-1">
@@ -206,12 +202,13 @@
                     <div class="font-mono font-bold text-white text-sm" id="hero-timer">10:00</div>
                 </div>
                 <div class="flex items-end justify-between">
-                    <div class="text-3xl font-black text-white">390 ₴</div>
-                    <div class="text-xs text-gray-400 line-through decoration-brand-red decoration-2 font-bold mb-1">1790 ₴</div>
+                    <!-- Ціна підміняється JS -->
+                    <div id="ui-price-main" class="text-3xl font-black text-white">390 ₴</div>
+                    <div id="ui-price-old" class="text-xs text-gray-400 line-through decoration-brand-red decoration-2 font-bold mb-1">1790 ₴</div>
                 </div>
             </div>
 
-            <!-- Кнопка (Прихована на мобільному, бо є в хедері та знизу) -->
+            <!-- Кнопка -->
             <div class="w-full max-w-xs mx-auto hidden md:block mt-4">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
@@ -244,47 +241,36 @@
                 <!-- Слайдер -->
                 <div id="storytelling-container" class="flex overflow-x-auto gap-4 pb-8 scrollbar-hide px-4 md:px-0">
                     
-                    <!-- ФОТО 1 -->
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="1.jpg" alt="Результат 1">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
-                    <!-- ФОТО 2 -->
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="5.jpg" alt="Результат 2">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
-                    <!-- ФОТО 3 -->
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="3.jpg" alt="Результат 3">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
-                    <!-- ФОТО 4 -->
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="4.jpg" alt="Результат 4">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
-                    <!-- ФОТО 5 -->
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="2.jpg" alt="Результат 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
-                    <!-- ФОТО 6 -->
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="6.jpg" alt="Результат 6">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
@@ -305,18 +291,10 @@
                 <p class="text-[10px] uppercase tracking-widest">Гортайте приклади</p>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </div>
-
-            <!-- ADDED BUTTON AFTER BLOCK -->
-            <div class="w-full max-w-xs mx-auto mt-10">
-                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу розбір прогрівів</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
-            </div>
         </div>
     </section>
 
-    <!-- AGITATION SECTION (Впізнаєш себе?) -->
+    <!-- AGITATION SECTION -->
     <section class="py-20 px-4 bg-brand-bg">
         <div class="max-w-md mx-auto space-y-10">
             <h2 class="text-3xl font-extrabold text-white leading-none uppercase tracking-tight text-center">
@@ -336,7 +314,6 @@
                         </p>
                     </div>
                 </div>
-
                 <!-- Card 2 -->
                 <div class="bg-brand-asphalt p-7 rounded-xl border border-brand-border shadow-card relative overflow-hidden group hover:border-brand-red/50 transition-colors duration-300">
                     <div class="absolute -right-4 -top-4 text-brand-lightgrey/20 group-hover:text-brand-red/10 transition-colors">
@@ -349,7 +326,6 @@
                         </p>
                     </div>
                 </div>
-
                 <!-- Card 3 -->
                 <div class="bg-brand-asphalt p-7 rounded-xl border border-brand-border shadow-card relative overflow-hidden group hover:border-brand-red/50 transition-colors duration-300">
                     <div class="absolute -right-4 -top-4 text-brand-lightgrey/20 group-hover:text-brand-red/10 transition-colors">
@@ -363,18 +339,10 @@
                     </div>
                 </div>
             </div>
-
-            <!-- ADDED BUTTON AFTER BLOCK -->
-            <div class="w-full max-w-xs mx-auto mt-10">
-                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу розбір прогрівів</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
-            </div>
         </div>
     </section>
 
-    <!-- MISTAKES SECTION (TEXT LIST WITH ICONS RETURNED) -->
+    <!-- MISTAKES SECTION -->
     <section class="py-20 px-4 bg-[#222222] border-t border-brand-border relative">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
@@ -387,9 +355,7 @@
             </div>
 
             <div class="space-y-4 max-w-3xl mx-auto">
-                <!-- Point 1 -->
                 <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
-                    <!-- ЗНАЧОК ПОВЕРНУТО -->
                     <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
                         <i data-lucide="file-warning" class="w-8 h-8 text-brand-red"></i>
                     </div>
@@ -399,10 +365,7 @@
                         </p>
                     </div>
                 </div>
-
-                <!-- Point 2 -->
                 <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
-                     <!-- ЗНАЧОК ПОВЕРНУТО -->
                     <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
                         <i data-lucide="shuffle" class="w-8 h-8 text-brand-red"></i>
                     </div>
@@ -412,10 +375,7 @@
                         </p>
                     </div>
                 </div>
-
-                <!-- Point 3 -->
                 <div class="flex flex-col md:flex-row gap-4 items-start bg-brand-asphalt p-6 rounded-xl border border-brand-border shadow-md hover:border-brand-red/50 transition-all">
-                     <!-- ЗНАЧОК ПОВЕРНУТО -->
                     <div class="bg-brand-red/10 p-3 rounded-full shrink-0">
                         <i data-lucide="battery-warning" class="w-8 h-8 text-brand-red"></i>
                     </div>
@@ -425,14 +385,6 @@
                         </p>
                     </div>
                 </div>
-            </div>
-
-            <!-- ADDED BUTTON AFTER BLOCK -->
-            <div class="w-full max-w-xs mx-auto mt-10">
-                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу розбір прогрівів</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
             </div>
         </div>
     </section>
@@ -454,31 +406,21 @@
                     <h3 class="font-bold text-white text-xl uppercase">Стратегія дій</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">Покроковий план під твої цілі і нішу. Без води, тільки те, що дає гроші.</p>
                 </div>
-
                 <div class="bg-[#222] p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
                     <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">02</div>
                     <h3 class="font-bold text-white text-xl uppercase">Аудит помилок</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">Чому контент не конвертує заявки. Розбір твоїх слабких місць.</p>
                 </div>
-
                 <div class="bg-[#222] p-6 rounded-2xl border border-brand-border shadow-card flex flex-col gap-3 hover:border-brand-red transition-all">
                     <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center text-white font-black text-xl mb-1 shadow-glow">03</div>
                     <h3 class="font-bold text-white text-xl uppercase">Схема прогрівів</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">Власна схема прогрівів під тебе, яку ти зможеш впровадити вже завтра.</p>
                 </div>
             </div>
-
-            <!-- ADDED BUTTON AFTER BLOCK -->
-            <div class="w-full max-w-xs mx-auto mt-10">
-                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу розбір прогрівів</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
-            </div>
         </div>
     </section>
 
-    <!-- EXPERT SECTION (Влада Царенко) -->
+    <!-- EXPERT SECTION -->
     <section class="py-20 px-4 bg-[#222222] relative">
         <div class="max-w-md mx-auto">
             <div class="mb-8 text-center">
@@ -520,62 +462,46 @@
                     </li>
                 </ul>
             </div>
-
-            <!-- ADDED BUTTON AFTER BLOCK -->
-            <div class="w-full max-w-xs mx-auto mt-10">
-                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу розбір прогрівів</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
-            </div>
         </div>
     </section>
 
-    <!-- SYSTEM RESULTS (ЗМІНЕНО НА КВАДРАТ, НЕСКІНЧЕННИЙ, БЕЗ РЫВКОВ) -->
+    <!-- SYSTEM RESULTS -->
     <section class="py-20 bg-brand-bg border-t border-brand-border relative">
         <div class="max-w-4xl mx-auto px-4">
-            <!-- ЗМІНЕНА НАЗВА -->
             <h2 class="text-2xl font-black text-center mb-8 text-white uppercase tracking-wide">
                 Результати <span class="text-brand-red">моєї системи</span>
             </h2>
             
-             <!-- Контейнер слайдера з кнопками -->
              <div class="relative max-w-5xl mx-auto group/slider">
                 <button onclick="scrollContainer('reviews-container', -1)" class="hidden md:flex absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center bg-brand-red rounded-full text-white shadow-glow hover:bg-brand-darkred transition-all">
                     <i data-lucide="chevron-left" class="w-6 h-6"></i>
                 </button>
 
-                <!-- КВАДРАТНІ КАРТКИ (ПРИБРАНО snap-x та snap-mandatory) -->
                 <div id="reviews-container" class="flex overflow-x-auto gap-4 pb-8 scrollbar-hide px-4 md:px-0">
-                    
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="05.jpg">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="02.jpg" alt="Review 2">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="03.jpg" alt="Review 3">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="04.jpg" alt="Review 4">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                             <i data-lucide="zoom-in" class="text-white w-10 h-10 opacity-80 drop-shadow-lg"></i>
                         </div>
                     </div>
-
                     <div class="shrink-0 w-[80vw] md:w-[320px] aspect-square gallery-card rounded-xl border border-brand-border hover:border-brand-red transition-all group cursor-pointer" onclick="openImageModal(this)">
                         <img src="06.jpg" alt="Review 5">
                         <div class="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
@@ -613,9 +539,7 @@
                         </div>
                      </div>
                     </div>
-                   
                 </div>
-
                 <button onclick="scrollContainer('reviews-container', 1)" class="hidden md:flex absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center bg-brand-red rounded-full text-white shadow-glow hover:bg-brand-darkred transition-all">
                     <i data-lucide="chevron-right" class="w-6 h-6"></i>
                 </button>
@@ -625,14 +549,6 @@
                 <i data-lucide="chevron-left" class="w-4 h-4"></i>
                 <p class="text-[10px] uppercase tracking-widest">Гортайте та натисніть для перегляду</p>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </div>
-
-            <!-- ADDED BUTTON AFTER BLOCK -->
-            <div class="w-full max-w-xs mx-auto mt-10">
-                <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
-                    <span>Хочу розбір прогрівів</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
             </div>
         </div>
     </section>
@@ -656,7 +572,7 @@
                     </h3>
                     
                     <p class="text-gray-300 text-sm mb-8 font-medium leading-relaxed">
-                        Якщо персональна стратегія не принесе користі — я поверну вам усі 390 грн.
+                        Якщо персональна стратегія не принесе користі — я поверну вам усі <span id="guarantee-price">390</span> грн.
                     </p>
 
                     <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
@@ -668,8 +584,8 @@
         </div>
     </section>
 
-    <!-- FLOATING CTA (FIXED: ALWAYS VISIBLE 'cta-visible' by default) -->
-    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6 cta-visible">
+    <!-- FLOATING CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full z-40 px-4 pb-safe bg-gradient-to-t from-brand-bg via-brand-bg/95 to-transparent pt-6 cta-hidden">
         <div class="max-w-md mx-auto">
             <button onclick="openModal()" class="w-full bg-brand-red hover:bg-red-700 text-white font-extrabold text-lg py-4 rounded-xl shadow-glow transition-all transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-wider border border-white/20 mb-2">
                 <span>Хочу розбір прогрівів</span>
@@ -736,6 +652,35 @@
         const WFP_MERCHANT_ACCOUNT = 'YOUR_MERCHANT_LOGIN'; 
         const WFP_MERCHANT_DOMAIN = 'YOUR_WEBSITE.COM'; 
 
+        // --- A/B TESTING LOGIC (PRICE CONTROL) ---
+        const PRICING = {
+            '882': { current: 290, old: 1290 }, // Low price
+            'default': { current: 390, old: 1790 }, // Normal price
+            '551': { current: 590, old: 2190 } // High price
+        };
+
+        let currentPriceObj = PRICING['default'];
+
+        function initPrice() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const uid = urlParams.get('uid'); // Get code from URL
+
+            if (uid && PRICING[uid]) {
+                currentPriceObj = PRICING[uid];
+            } else {
+                currentPriceObj = PRICING['default'];
+            }
+
+            // Update HTML
+            const priceMain = document.getElementById('ui-price-main');
+            const priceOld = document.getElementById('ui-price-old');
+            const guaranteePrice = document.getElementById('guarantee-price');
+
+            if (priceMain) priceMain.textContent = currentPriceObj.current + ' ₴';
+            if (priceOld) priceOld.textContent = currentPriceObj.old + ' ₴';
+            if (guaranteePrice) guaranteePrice.textContent = currentPriceObj.current;
+        }
+
         // TIMER
         function startTimer(duration, displays) {
             let timer = duration, minutes, seconds;
@@ -775,12 +720,30 @@
             setTimeout(centerPosition, 100);
         }
 
-        // STICKY CTA LOGIC - DISABLED HIDE LOGIC SO IT IS PINNED FROM START
+        // STICKY CTA LOGIC - FIXED TO TRIGGER IMMEDIATELY
         function initStickyObserver() {
-            // Logic removed so button is always visible
+            const header = document.getElementById('main-header'); // Target the header
+            const stickyCta = document.getElementById('sticky-cta');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Header visible (top of page) -> HIDE sticky
+                        stickyCta.classList.add('cta-hidden');
+                        stickyCta.classList.remove('cta-visible');
+                    } else {
+                        // Header NOT visible (scrolled down) -> SHOW sticky
+                        stickyCta.classList.remove('cta-hidden');
+                        stickyCta.classList.add('cta-visible');
+                    }
+                });
+            }, { threshold: 0 }); // Threshold 0 means "trigger as soon as 1 pixel leaves"
+
+            if(header) observer.observe(header);
         }
 
         window.onload = function () {
+            initPrice(); // Set price on load
             const tenMinutes = 60 * 10;
             const displays = [document.querySelector('#hero-timer')];
             startTimer(tenMinutes, displays);
@@ -844,6 +807,10 @@
 
         // Функція виклику WayForPay
         function pay(orderData) {
+            // Беремо ціну з глобальної змінної, яка встановлена через initPrice()
+            // Це захист від підміни
+            const safeAmount = String(currentPriceObj.current);
+
             var wayforpay = new Wayforpay();
             wayforpay.run({
                 merchantAccount : WFP_MERCHANT_ACCOUNT,
@@ -852,10 +819,10 @@
                 merchantSignature : "", 
                 orderReference : orderData.orderId, 
                 orderDate :  Math.floor(Date.now() / 1000),
-                amount : "390",
+                amount : safeAmount, // Використовуємо динамічну безпечну ціну
                 currency : "UAH",
                 productName : ["Персональна Діагностика"],
-                productPrice : ["390"],
+                productPrice : [safeAmount], // Використовуємо динамічну безпечну ціну
                 productCount : ["1"],
                 clientFirstName : orderData.name,
                 clientPhone: orderData.phone,
@@ -863,7 +830,7 @@
             },
             function (response) {
                 // on approved
-                fbq('track', 'Purchase', {value: 390, currency: 'UAH'});
+                fbq('track', 'Purchase', {value: safeAmount, currency: 'UAH'});
                 window.location.href = "YOUR_THANK_YOU_PAGE_URL"; 
             },
             function (response) {
@@ -911,6 +878,8 @@
                 orderId: uniqueOrderId, 
                 name: document.getElementById('name').value,
                 phone: iti.getNumber(),
+                amount: currentPriceObj.current, // Сума для стовпчика "Сума"
+                variant_name: `Price Test: ${currentPriceObj.current} UAH`, // ОКРЕМЕ ПОЛЕ ВАРІАНТУ ДЛЯ ТАБЛИЦІ
                 status: "Pending Payment", 
                 ...getUTM()
             };
