@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -163,7 +163,6 @@
     </header>
 
     <!-- HERO SECTION -->
-    <!-- ЗМІНЕНО: justify-end -> justify-center (щоб підняти контент), прибрано великий pt -->
     <section id="hero-section" class="relative min-h-[100dvh] flex flex-col justify-center pb-4 overflow-hidden bg-brand-bg">
         
         <!-- Фонове зображення -->
@@ -179,7 +178,6 @@
         </div>
 
         <!-- Контейнер контенту -->
-        <!-- ЗМІНЕНО: Прибрано великий pt-[28vh], додано відступи для кращого центрування -->
         <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center mt-16 md:mt-0">
             
             <!-- Бейдж -->
@@ -188,34 +186,39 @@
             </div>
 
             <!-- Головний Оффер -->
-            <!-- ЗМІНЕНО: text-xl -> text-3xl (збільшено шрифт) -->
             <h1 class="text-3xl xs:text-4xl md:text-6xl font-[900] leading-[1.1] text-white uppercase mb-4 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
 
             <!-- Підзаголовок -->
-            <!-- ЗМІНЕНО: Збільшено текст -->
             <p class="text-gray-200 font-bold text-sm md:text-xl leading-relaxed mb-6 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
                 Отримай персональну діагностику, на якій я детально розберу твої прогріви.
             </p>
 
-            <!-- Ціна та Таймер -->
-            <div class="glass-card rounded-xl p-3 shadow-glow w-full mb-4 border border-white/20 relative overflow-hidden max-w-[280px] mx-auto">
-                <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
-                    <span class="text-[10px] text-brand-red font-bold uppercase tracking-wider flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 bg-brand-red rounded-full animate-ping"></span>
-                        Збільшення ціни:
-                    </span>
-                    <div class="font-mono font-bold text-white text-sm" id="hero-timer">10:00</div>
+            <!-- Ціна та Таймер (НОВИЙ ДИЗАЙН) -->
+            <div class="w-full max-w-[320px] mx-auto flex flex-col gap-3 mb-6">
+                
+                <!-- Блок Ціни -->
+                <div class="bg-[#151515] rounded-2xl p-6 text-center shadow-2xl relative overflow-hidden border border-white/5">
+                    <div id="ui-price-main" class="relative z-10 text-5xl font-black text-white leading-none mb-2 drop-shadow-lg">
+                        390 ₴
+                    </div>
+                    <div id="ui-price-old" class="relative z-10 text-gray-500 line-through font-medium text-lg decoration-1">
+                        1790 ₴
+                    </div>
                 </div>
-                <div class="flex items-end justify-between">
-                    <div id="ui-price-main" class="text-3xl font-black text-white">390 ₴</div>
-                    <div id="ui-price-old" class="text-xs text-gray-400 line-through decoration-brand-red decoration-2 font-bold mb-1">1790 ₴</div>
+
+                <!-- Блок Таймера -->
+                <div class="border-2 border-dashed border-brand-red rounded-xl py-3 px-4 text-center bg-black/60 backdrop-blur-sm">
+                    <p class="text-white text-[11px] md:text-xs font-bold uppercase tracking-wider mb-0 inline-flex items-center gap-2">
+                        до збільшення ціни: 
+                        <span id="hero-timer" class="text-brand-red text-xl font-black font-mono">10:00</span>
+                    </p>
                 </div>
+
             </div>
 
             <!-- Кнопка -->
-            <!-- ЗМІНЕНО: Прибрано клас hidden md:block, тепер кнопка видима завжди -->
             <div class="w-full max-w-xs mx-auto mt-2">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
