@@ -163,7 +163,8 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section id="hero-section" class="relative min-h-[100dvh] flex flex-col justify-end pb-4 overflow-hidden bg-brand-bg">
+    <!-- ЗМІНЕНО: justify-end -> justify-center (щоб підняти контент), прибрано великий pt -->
+    <section id="hero-section" class="relative min-h-[100dvh] flex flex-col justify-center pb-4 overflow-hidden bg-brand-bg">
         
         <!-- Фонове зображення -->
         <div class="absolute inset-0 z-0 overflow-hidden">
@@ -178,7 +179,8 @@
         </div>
 
         <!-- Контейнер контенту -->
-        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center pt-[28vh] md:pt-0">
+        <!-- ЗМІНЕНО: Прибрано великий pt-[28vh], додано відступи для кращого центрування -->
+        <div class="container mx-auto px-4 relative z-20 w-full max-w-lg md:max-w-2xl flex flex-col items-center text-center mt-16 md:mt-0">
             
             <!-- Бейдж -->
             <div class="inline-block bg-brand-red px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white mb-2 rounded-sm shadow-glow animate-pulse">
@@ -186,17 +188,19 @@
             </div>
 
             <!-- Головний Оффер -->
-            <h1 class="text-xl xs:text-2xl md:text-5xl font-[900] leading-[1.1] text-white uppercase mb-2 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
+            <!-- ЗМІНЕНО: text-xl -> text-3xl (збільшено шрифт) -->
+            <h1 class="text-3xl xs:text-4xl md:text-6xl font-[900] leading-[1.1] text-white uppercase mb-4 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] text-shadow-strong">
                 ОТРИМАЙ <span class="text-brand-red">СХЕМУ ПРОГРІВІВ</span> ТА <span class="text-brand-red">СИСТЕМИ КОНТЕНТУ</span>, ЗАВДЯКИ ЯКІЙ МОЖНА ГЕНЕРУВАТИ <span class="text-brand-red">10+ ЗАЯВОК</span> ЩОДНЯ
             </h1>
 
             <!-- Підзаголовок -->
-            <p class="text-gray-200 font-bold text-xs md:text-lg leading-relaxed mb-3 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
+            <!-- ЗМІНЕНО: Збільшено текст -->
+            <p class="text-gray-200 font-bold text-sm md:text-xl leading-relaxed mb-6 drop-shadow-md max-w-sm mx-auto border-brand-red pl-0">
                 Отримай персональну діагностику, на якій я детально розберу твої прогріви.
             </p>
 
             <!-- Ціна та Таймер -->
-            <div class="glass-card rounded-xl p-3 shadow-glow w-full mb-1 border border-white/20 relative overflow-hidden max-w-[280px] mx-auto">
+            <div class="glass-card rounded-xl p-3 shadow-glow w-full mb-4 border border-white/20 relative overflow-hidden max-w-[280px] mx-auto">
                 <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
                     <span class="text-[10px] text-brand-red font-bold uppercase tracking-wider flex items-center gap-1">
                         <span class="w-1.5 h-1.5 bg-brand-red rounded-full animate-ping"></span>
@@ -211,17 +215,14 @@
             </div>
 
             <!-- Кнопка -->
-            <div class="w-full max-w-xs mx-auto hidden md:block mt-4">
+            <!-- ЗМІНЕНО: Прибрано клас hidden md:block, тепер кнопка видима завжди -->
+            <div class="w-full max-w-xs mx-auto mt-2">
                  <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
                     <span>Хочу розбір прогрівів</span>
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </button>
             </div>
             
-            <!-- Мобільна стрілка вниз -->
-            <div class="mt-1 md:hidden text-white/50 animate-bounce">
-                <i data-lucide="chevron-down" class="w-5 h-5"></i>
-            </div>
         </div>
     </section>
 
@@ -293,6 +294,14 @@
                 <p class="text-[10px] uppercase tracking-widest">Гортайте приклади</p>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </div>
+
+            <!-- ДОДАНО КНОПКУ -->
+            <div class="w-full max-w-xs mx-auto mt-8">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -341,6 +350,14 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ДОДАНО КНОПКУ -->
+            <div class="w-full max-w-xs mx-auto mt-8">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -388,6 +405,14 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ДОДАНО КНОПКУ -->
+            <div class="w-full max-w-xs mx-auto mt-8">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -418,6 +443,14 @@
                     <h3 class="font-bold text-white text-xl uppercase">Схема прогрівів</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">Власна схема прогрівів під тебе, яку ти зможеш впровадити вже завтра.</p>
                 </div>
+            </div>
+
+            <!-- ДОДАНО КНОПКУ -->
+            <div class="w-full max-w-xs mx-auto mt-8">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -463,6 +496,14 @@
                         </div>
                     </li>
                 </ul>
+            </div>
+
+            <!-- ДОДАНО КНОПКУ -->
+            <div class="w-full max-w-xs mx-auto mt-8">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -551,6 +592,14 @@
                 <i data-lucide="chevron-left" class="w-4 h-4"></i>
                 <p class="text-[10px] uppercase tracking-widest">Гортайте та натисніть для перегляду</p>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </div>
+
+            <!-- ДОДАНО КНОПКУ -->
+            <div class="w-full max-w-xs mx-auto mt-8">
+                 <button onclick="openModal()" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold text-lg py-4 rounded-lg shadow-glow transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 uppercase tracking-wide border border-white/10">
+                    <span>Хочу розбір прогрівів</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </section>
