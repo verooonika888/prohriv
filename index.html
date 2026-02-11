@@ -148,20 +148,6 @@
 </head>
 <body class="antialiased overflow-x-hidden pb-24">
 
-    <!-- HEADER (BUFFER) -->
-    <header id="main-header" class="absolute top-0 left-0 w-full z-40 px-4 py-6">
-        <div class="container mx-auto max-w-5xl flex justify-between items-center">
-            <!-- Logo / Name -->
-            <div class="font-black text-xl md:text-2xl uppercase tracking-tighter text-white drop-shadow-md">
-                Влада <span class="text-brand-red">Царенко</span>
-            </div>
-            <!-- Header Button -->
-            <button onclick="openModal()" class="bg-brand-red hover:bg-brand-darkred text-white text-xs md:text-sm font-extrabold py-3 px-5 rounded-lg shadow-glow transition-all uppercase tracking-wide border border-white/10">
-                Замовити розбір
-            </button>
-        </div>
-    </header>
-
     <!-- HERO SECTION -->
     <section id="hero-section" class="relative min-h-[100dvh] flex flex-col justify-center pb-4 overflow-hidden bg-brand-bg">
         
@@ -200,7 +186,10 @@
                 
                 <!-- Блок Ціни -->
                 <div class="bg-[#151515] rounded-2xl p-6 text-center shadow-2xl relative overflow-hidden border border-white/5">
-                    <div id="ui-price-main" class="relative z-10 text-5xl font-black text-white leading-none mb-2 drop-shadow-lg">
+                    <!-- ТУТ ЗМІНЕНО: Додано drop-shadow та text-shadow червоного кольору -->
+                    <div id="ui-price-main" 
+                         class="relative z-10 text-5xl font-black text-white leading-none mb-2 drop-shadow-[0_0_25px_rgba(230,57,70,0.9)]"
+                         style="text-shadow: 0 0 20px rgba(230, 57, 70, 0.6);">
                         390 ₴
                     </div>
                     <div id="ui-price-old" class="relative z-10 text-gray-500 line-through font-medium text-lg decoration-1">
