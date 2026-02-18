@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оплата успішна! | Влада Царенко</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body { background-color: #1C1C1C; color: #ffffff; font-family: sans-serif; }
-    </style>
+    <title>Дякуємо за оплату!</title>
     
-    <!-- Meta Pixel Code (Purchase Event) -->
+    <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -21,72 +16,59 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // ЗАМІНІТЬ YOUR_PIXEL_ID НА ВАШ
-    fbq('init', 'YOUR_PIXEL_ID'); 
+    fbq('init', '1648181812851913');
     fbq('track', 'PageView');
+    
+    // Отримуємо ціну з localStorage
+    const price = localStorage.getItem('purchase_price') || '390';
+    
+    fbq('track', 'Purchase', {
+        value: parseFloat(price),
+        currency: 'UAH',
+        content_name: 'Персональна Діагностика',
+        content_category: price + ' грн'
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=1648181812851913&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            background-color: #1C1C1C;
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen text-center px-4">
-
-    <div class="max-w-md w-full bg-[#262626] border border-[#404040] rounded-2xl p-8 shadow-2xl">
-        <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500">
-            <i data-lucide="check" class="w-10 h-10"></i>
+<body class="min-h-screen flex items-center justify-center p-4">
+    
+    <div class="text-center max-w-md mx-auto">
+        <!-- Іконка успіху -->
+        <div class="w-24 h-24 bg-gradient-to-b from-[#E63946] to-[#9B2226] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            </svg>
         </div>
         
-        <h1 class="text-2xl font-black uppercase mb-4 text-white">Дякуємо за покупку!</h1>
+        <h1 class="text-3xl font-bold text-white mb-4">Дякуємо за оплату!</h1>
         
-        <div class="space-y-4 text-gray-300 text-lg leading-relaxed">
-            <p>Ваша оплата пройшла успішно.</p>
-            <p class="font-bold text-white border-t border-b border-white/10 py-4">
-                Ми зв'яжемося з вами найближчим часом для узгодження дати та часу проведення діагностики.
-            </p>
-            <p class="text-sm text-gray-500">
-                Перевірте, чи вказали ви правильний номер телефону/Telegram при оформленні.
-            </p>
-        </div>
-
-        <!-- Кнопка повернення на головну (за бажанням, можна прибрати) -->
-        <a href="/" class="inline-block mt-8 text-sm text-[#E63946] hover:text-white transition-colors underline decoration-2 underline-offset-4">
-            Повернутися на головну
+        <p class="text-gray-300 mb-6 leading-relaxed">
+            Найближчим часом з вами зв'яжуться.<br><br>
+            А поки приєднуйтесь до каналу Влади — там багато корисного!
+        </p>
+        
+        <a href="https://t.me/+6a38CF05_Xk0MTI0" class="inline-block bg-gradient-to-r from-[#E63946] to-[#9B2226] text-white font-bold py-4 px-8 rounded-lg uppercase tracking-wider transition-all hover:opacity-90">
+            Приєднатися до каналу
         </a>
     </div>
 
-    <script>
-        lucide.createIcons();
-        
-        // ВСТАВТЕ ТУТ ВАШЕ ПОСИЛАННЯ НА ГУГЛ СКРИПТ (Те саме, що і в index.html)
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5Gz2aD1fuz0T4fACh7w3YhJdqRvrysxeLRKJB2rRGzFT9QEQa_sA3dNCS29ccv_ObVg/exec'; 
-
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const orderReference = urlParams.get('orderReference');
-            
-            // Трекінг покупки
-            const savedAmount = localStorage.getItem('wfp_amount') || '390';
-            fbq('track', 'Purchase', {value: savedAmount, currency: 'UAH'});
-
-            // Оновлення статусу в таблиці (фоном)
-            if(orderReference && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
-                fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: "update_payment_status",
-                        orderId: orderReference,
-                        status: "PAID_SUCCESS"
-                    })
-                }).then(() => {
-                    console.log("Status updated to PAID");
-                }).catch(err => {
-                    console.error("Error updating status:", err);
-                });
-            }
-        };
-    </script>
 </body>
 </html>
