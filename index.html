@@ -34,12 +34,11 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // ЗАМІНІТЬ НА ВАШ РЕАЛЬНИЙ PIXEL ID
-    fbq('init', 'YOUR_PIXEL_ID'); 
+    fbq('init', '1648181812851913'); 
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="1648181812851913"
+    src="https://www.facebook.com/tr?id=1648181812851913&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
 
@@ -815,7 +814,12 @@
         const modal = document.getElementById('modal');
         function openModal() {
             modal.classList.remove('hidden');
-            fbq('track', 'InitiateCheckout');
+            fbq('track', 'InitiateCheckout', {
+                value: parseFloat(currentPriceObj.current),
+                currency: 'UAH',
+                content_name: 'Персональна Діагностика',
+                content_category: currentPriceObj.current + ' грн'
+            });
         }
         function closeModal() {
             modal.classList.add('hidden');
@@ -964,7 +968,15 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             }).then(() => {
-                fbq('track', 'Lead');
+                // Зберігаємо ціну для сторінки success.html
+                localStorage.setItem('purchase_price', currentPriceObj.current);
+                
+                fbq('track', 'Lead', {
+                    value: parseFloat(currentPriceObj.current),
+                    currency: 'UAH',
+                    content_name: 'Персональна Діагностика',
+                    content_category: currentPriceObj.current + ' грн'
+                });
                 pay({
                     orderId: uniqueOrderId,
                     name: formData.name,
